@@ -1,4 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/Users/thEnigma/Desktop/Git/ExSAINT/Parser'
-let g:netrw_dirhist_2='/Users/thEnigma/downloads/binary-search-code/Another compiled version'
