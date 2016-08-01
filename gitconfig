@@ -1,0 +1,14 @@
+[user]
+  name = Rachit Nigam
+  email = rachit.nigam12@gmail.com
+  signingkey = 37604B3B86354F8B
+
+[core]
+  excludesfile = ~/.gitignore
+  editor = /usr/local/vim
+ 
+[push]
+  default = simple
+ 
+[commit]
+  gpgsign = true
