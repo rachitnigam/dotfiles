@@ -9,7 +9,7 @@ if ! hash vim; then
 fi
 
 echo "Setting up basic file"
-ln -sv $wd/bashrc $HOME/.bashrc
+cat $wd/bashrc >> $HOME/.bashrc
 ln -sv $wd/vimrc $HOME/.vimrc
 ln -sv $wd/vim $HOME/.vim
 ln -sv $wd/gitconfig $HOME/.gitconfig
