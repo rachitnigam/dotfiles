@@ -1,0 +1,2 @@
+## fish
+My fish configuration
