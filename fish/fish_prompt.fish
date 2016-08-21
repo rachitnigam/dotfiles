@@ -1,13 +1,5 @@
 source ~/.bash_alias
 
-function f
-  source ~/smart_term/f.fish $argv
-end
-
-function r
-  source ~/smart_term/r.fish $argv
-end
-
 set lastdir '/'
 
 function dir_changed
@@ -40,18 +32,33 @@ function git_status
   set -l status_val (git status)
   set_color af00af
   echo -n "status: "
+
   if echo $status_val | grep -q 'up-to-date'
-    set_color afff00
-    echo -n "up-to-date"
-    set_color normal
+
+    if echo $status_val | grep -q -i 'Changes not staged for commit'
+      set_color 87afff
+      echo -n 'un-commited changes'
+      set_color normal
+    else if echo $status_val | grep -q -i 'Untracked files'
+      set_color brbrown
+      echo -n 'Untracked files'
+      set_color normal
+    else
+      set_color afff00
+      echo -n "up-to-date"
+      set_color normal
+    end
+
   else if echo $status_val | grep -q 'ahead'
     set_color 87ffd7
     echo -n "ahead"
     set_color normal
+
   else if echo $status_val | grep -q 'behind'
     set_color ff5f00
     echo -n "behind"
     set_color normal
+
   else
     set_color red
     echo -n "unknown"
@@ -60,6 +67,7 @@ function git_status
 end
 
 function fish_prompt
+  echo
   set_color ff5f00
   echo -n $PWD " " 
   show_git
