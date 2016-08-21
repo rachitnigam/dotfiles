@@ -10,10 +10,12 @@ db = MySQLdb.connect(db="directory", host="localhost",
 cur = db.cursor()
 pwd = os.environ['PWD']
 
-cur.execute(
-    "INSERT INTO dircounts (path, count) VALUES (%s, 1) ON DUPLICATE KEY UPDATE count = count + 1",
-    (pwd)
-)
+home = os.environ['HOME']
+if pwd != home:
+    cur.execute(
+        "INSERT INTO dircounts (path, count) VALUES (%s, 1) ON DUPLICATE KEY UPDATE count = count + 1",
+        (pwd)
+    )
+    db.commit()
 
-db.commit()
 db.close()

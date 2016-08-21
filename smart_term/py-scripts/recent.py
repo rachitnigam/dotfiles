@@ -11,12 +11,14 @@ db = MySQLdb.connect(db="directory", host="localhost",
                      cursorclass=MySQLdb.cursors.DictCursor)
 
 cur = db.cursor()
-
 cur.execute("SELECT path from dircounts WHERE UNIX_TIMESTAMP(time) > UNIX_TIMESTAMP(now()) - %s ORDER BY time DESC LIMIT 7", span)
-
 st = cur.fetchall()
-flag = (len(sys.argv) == 2) and (int(sys.argv[1]) in range(1, len(st) + 1))
 ret = os.environ['PWD']
+
+try:
+    flag = (len(sys.argv) == 2) and (int(sys.argv[1]) in range(1, len(st) + 1))
+except:
+    flag = False
 
 if(flag):
 	switch_row = int(sys.argv[1])

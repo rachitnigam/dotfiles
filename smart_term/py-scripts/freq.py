@@ -11,19 +11,23 @@ db = MySQLdb.connect(db="directory", host="localhost",
                      cursorclass=MySQLdb.cursors.DictCursor)
 
 cur = db.cursor()
-
 cur.execute("SELECT path from dircounts ORDER BY count DESC LIMIT %s", listLen)
-
 st = cur.fetchall()
-flag = (len(sys.argv) == 2) and (int(sys.argv[1]) in range(1, len(st) + 1))
+
+flag = False
 ret = os.environ['PWD']
+
+try:
+    flag = (len(sys.argv) == 2) and (int(sys.argv[1]) in range(1, len(st) + 1))
+except ValueError:
+    pass
 
 if(flag):
 	switch_row = int(sys.argv[1])
 	dir_to_change = st[switch_row - 1]['path']
 	ret = dir_to_change
 else:
-	sys.stderr.write("+ change to recent directory with: f <number>\n")
+	sys.stderr.write("+ change to frequent directory with: f <number>\n")
 	count = 1
 	for row in st:
 		path = row['path']
@@ -31,5 +35,5 @@ else:
 		count += 1
 	sys.stderr.flush()
 
-db.close
+db.close()
 print ret
