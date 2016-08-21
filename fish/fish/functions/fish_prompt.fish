@@ -1,15 +1,5 @@
 source ~/.bash_alias
 
-set lastdir '/'
-
-function dir_changed
-  set newdir (pwd)
-  if [ $lastdir != $newdir ]
-    python ~/smart_term/dircounts.pyc
-    set lastdir $newdir
-  end
-end
-
 function show_git
   set -l git_branch (git branch ^/dev/null | sed -n '/\* /s///p') ""
   if [ $git_branch[1] = "" ]
@@ -36,6 +26,10 @@ function git_status
   if echo $status_val | grep -q 'up-to-date'
 
     if echo $status_val | grep -q -i 'Changes not staged for commit'
+      set_color 87afff
+      echo -n 'un-commited changes'
+      set_color normal
+    else if echo $status_val | grep -q -i 'Changes to be committed'
       set_color 87afff
       echo -n 'un-commited changes'
       set_color normal
@@ -81,6 +75,4 @@ function fish_prompt
   set_color ff5f00
   echo -n '> '
   set_color normal
-
-  dir_changed
 end
