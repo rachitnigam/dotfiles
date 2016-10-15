@@ -13,6 +13,7 @@ fi
 
 echo "Setting up basic file"
 cp $wd/vimrc $HOME/.vimrc
+mkdir -p $HOME/.vim/{backup,swap,undo}
 if [ $? -eq 0 ]; then
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   if [ $? -eq 0 ]; then
