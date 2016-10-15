@@ -1,18 +1,38 @@
 #!/bin/bash
-set -eu
 wd=$(pwd)
-echo $wd
 
 if ! hash vim; then
   echo "vim missing. Install vim to continue. Exiting..."
   exit 1
 fi
 
+if ! hash git; then
+  echo "git missing. Install git to continue. Exiting..."
+  exit 1
+fi
+
 echo "Setting up basic file"
-ln -sv $wd/vimrc $HOME/.vimrc
-ln -sv $wd/vim $HOME/.vim
-ln -sv $wd/gitconfig $HOME/.gitconfig
+cp $wd/vimrc $HOME/.vimrc
+if [ $? -eq 0 ]; then
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  if [ $? -eq 0 ]; then
+    set -lx SHELL bash; vim +BundleInstall! +BundleClean +qall
+    if [ $? -eq ]; then
+      echo 'vim configured'
+    else
+      echo 'Vundle failed to install packages. Fix issues and run :PluginInstall from vim'
+    fi
+  else
+    echo 'Failed to install Vundle. Removing .vimrc and aborting'
+    rm $HOME/.vimrc
+    exit 1
+  fi
+else
+  echo 'Failed to create new .vimrc. Aborting...'
+  exit 1
+fi
 
 echo "Setting up git"
+cp $wd/gitconfig $HOME/.gitconfig
 git config --global user.email "rachit.nigam12@gmail.com"
 git config --global user.name "thEnigma"

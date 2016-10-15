@@ -1,9 +1,0 @@
-[submodule "vim/bundle/nerdtree"]
-  path = vim/bundle/nerdtree
-  url = https://github.com/scrooloose/nerdtree
-[submodule "vim/bundle/vim-scala"]
-  path = vim/bundle/vim-scala
-  url = https://github.com/derekwyatt/vim-scala
-[submodule "vim/bundle/gruvbox"]
-  path = vim/bundle/gruvbox
-  url = https://github.com/morhetz/gruvbox
