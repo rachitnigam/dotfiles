@@ -16,8 +16,9 @@ cp $wd/vimrc $HOME/.vimrc
 if [ $? -eq 0 ]; then
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   if [ $? -eq 0 ]; then
-    set -lx SHELL bash; vim +BundleInstall! +BundleClean +qall
-    if [ $? -eq ]; then
+    set -x SHELL bash; vim +BundleInstall! +BundleClean +qall
+    if [ $? -eq 0 ]; then
+      cat $wd/vim_rest >> $HOME/.vimrc
       echo 'vim configured'
     else
       echo 'Vundle failed to install packages. Fix issues and run :PluginInstall from vim'
