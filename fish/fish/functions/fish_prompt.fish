@@ -6,6 +6,7 @@ function show_git
     echo ""
   else
     set_color 005fff
+    echo ""
     echo -n '{ ' 
     set_color af00af
     echo -n 'branch: '
@@ -23,25 +24,20 @@ function git_status
   set_color af00af
   echo -n "status: "
 
-  if echo $status_val | grep -q 'up-to-date'
+  if echo $status_val | grep -q -i 'Changes not staged for commit'
+    set_color 87afff
+    echo -n 'un-commited changes'
+    set_color normal
+  
+  else if echo $status_val | grep -q -i 'Changes to be committed'
+    set_color 87afff
+    echo -n 'un-commited changes'
+    set_color normal
 
-    if echo $status_val | grep -q -i 'Changes not staged for commit'
-      set_color 87afff
-      echo -n 'un-commited changes'
-      set_color normal
-    else if echo $status_val | grep -q -i 'Changes to be committed'
-      set_color 87afff
-      echo -n 'un-commited changes'
-      set_color normal
-    else if echo $status_val | grep -q -i 'Untracked files'
-      set_color brbrown
-      echo -n 'Untracked files'
-      set_color normal
-    else
-      set_color afff00
-      echo -n "up-to-date"
-      set_color normal
-    end
+  else if echo $status_val | grep -q -i 'untracked file'
+    set_color brbrown
+    echo -n 'Untracked files'
+    set_color normal
 
   else if echo $status_val | grep -q 'ahead'
     set_color 87ffd7
@@ -53,6 +49,11 @@ function git_status
     echo -n "behind"
     set_color normal
 
+  else if echo $status_val | grep -q 'nothing to commit'
+    set_color afff00
+    echo -n "up-to-date"
+    set_color normal
+
   else
     set_color red
     echo -n "unknown"
@@ -61,15 +62,18 @@ function git_status
 end
 
 function fish_prompt
-  echo
   set_color ff5f00
-  echo -n $PWD " " 
+  if [ $PWD = $HOME ]
+    echo -n ' ~ '
+  else
+    echo -n $PWD " "
+  end
   show_git
 
   set_color 005fff
   echo -n '[ ' 
   set_color afff00
-  echo -n (hostname) ' -> ' (whoami) 
+  echo -n (hostname -s) '->' (whoami) 
   set_color 005fff
   echo -n ' ] ' 
   set_color ff5f00
