@@ -52,9 +52,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set number
 set ruler
 
-" support scroll wheel and click
-set mouse=a
-
 " syntax folding, unfolded by default
 set foldmethod=syntax
 set foldlevelstart=99

@@ -19,6 +19,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'dag/vim-fish'
 Plugin 'luochen1990/rainbow'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'wikitopian/hardmode'
+Plugin 'tpope/vim-fugitive'
+Plugin 'edkolev/tmuxline.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
