@@ -38,3 +38,6 @@ echo "Setting up git"
 cp $wd/gitconfig $HOME/.gitconfig
 git config --global user.email "rachit.nigam12@gmail.com"
 git config --global user.name "thEnigma"
+
+echo 'Setting up tmux.conf'
+cp $wd/tmux.conf $HOME/.tmux.conf
