@@ -12,14 +12,15 @@ if ! hash git; then
 fi
 
 echo "Setting up basic file"
-cp $wd/vimrc $HOME/.vimrc
+cp $wd/vimrc.plugins $HOME/.vimrc
 mkdir -p $HOME/.vim/{backup,swap,undo}
 if [ $? -eq 0 ]; then
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   if [ $? -eq 0 ]; then
     set -x SHELL bash; vim +BundleInstall! +BundleClean +qall
     if [ $? -eq 0 ]; then
-      cat $wd/vim_rest >> $HOME/.vimrc
+      mv $HOME/.vimrc $HOME/.vimrc.plugins
+      cp $wd/vimrc $HOME/.vimrc
       echo 'vim configured'
     else
       echo 'Vundle failed to install packages. Fix issues and run :PluginInstall from vim'
