@@ -1,5 +1,3 @@
-source ~/.bash_alias
-
 function show_git
   set -l git_branch (git branch ^/dev/null | sed -n '/\* /s///p') ""
   if [ $git_branch[1] = "" ]
