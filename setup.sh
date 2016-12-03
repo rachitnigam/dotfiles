@@ -15,8 +15,8 @@ echo "Setting up basic file"
 cp $wd/vimrc.plugins $HOME/.vimrc
 mkdir -p $HOME/.vim/{backup,swap,undo}
 if [ $? -eq 0 ]; then
-  if [ ! -d $HOME/vim/bundle/Vundle.vim ]; then
-    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/vim/bundle/Vundle.vim
+  if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
   fi
   if [ $? -eq 0 ]; then
     set -x SHELL bash; vim +BundleInstall! +BundleClean +qall
