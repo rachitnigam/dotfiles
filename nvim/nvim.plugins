@@ -1,0 +1,25 @@
+" Vundle setup
+set nocompatible              " be iMproved, required
+filetype on                   " Mac requires this
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'morhetz/gruvbox'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dag/vim-fish'
+Plug 'luochen1990/rainbow'
+Plug 'derekwyatt/vim-scala'
+Plug 'wikitopian/hardmode'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Yggdroot/indentLine'
+
+call plug#end()
+filetype plugin indent on    " required
