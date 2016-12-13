@@ -1,5 +1,6 @@
 " Set shell to bash inside vim
 set shell=/bin/bash
+let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin')
 
 " Source plugins
 source ~/.config/nvim/nvim.plugins
@@ -35,16 +36,16 @@ autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 set splitbelow
 set splitright
 
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
 
 " Move between windows
-map <C-J> <C-W>j<C-W>_
-map <C-K> <C-W>k<C-W>_
-map <C-H> <C-W>h<C-W>_
-map <C-L> <C-W>l<C-W>_
+"map <C-J> <C-W>j<C-W>_
+"map <C-K> <C-W>k<C-W>_
+"map <C-H> <C-W>h<C-W>_
+"map <C-L> <C-W>l<C-W>_
 
 " set relative line numbers
 set relativenumber
@@ -104,10 +105,13 @@ au BufRead,BufNewFile *.smt set filetype=lisp
 set colorcolumn=100
 
 " Remove trailing whitespace on save
-autocmd FileType rust,scala,ocaml,java autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 "Toggle rainbow vim
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
 "Indent line turn off color overriding
 nnoremap <C-c> :IndentLinesToggle<CR>
+
+" Run neomake async after file save
+autocmd! BufWritePost * Neomake
