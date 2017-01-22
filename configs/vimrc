@@ -1,4 +1,43 @@
-source ~/.vimrc.plugins
+" Vim-plug setup
+set nocompatible
+filetype on                   " Mac requires this
+filetype off                  " required
+
+" vim-plug autoinstall if not present.
+" From https://github.com/aaronbieber/dotvim/blob/master/vimrc
+let plug_autoinstall = 0
+let plug_readme = expand('~/.vim/autoload/plug.vim')
+if !filereadable(plug_readme)
+    echo "Installing vim-plug..."
+    echo ""
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let plug_autoinstall = 1
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" let Vundle manage Vundle, required
+Plug 'morhetz/gruvbox'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'luochen1990/rainbow'
+Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
+Plug 'wikitopian/hardmode'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'scrooloose/nerdcommenter'
+
+call plug#end()            " required
+
+if plug_autoinstall
+    echo "Installing packages..."
+    echo ""
+    :PlugInstall
+endif
+
+filetype plugin indent on    " required
 
 " NERDtree setup
 " Default open
@@ -9,7 +48,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " crtl p setup
 " let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=*/target/*
 
 " Gruvbox initialize
@@ -80,11 +119,6 @@ set backspace=indent,eol,start
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-"set storage dirs
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-
 " .smt to .lisp
 au BufRead,BufNewFile *.smt set filetype=lisp
 
@@ -94,13 +128,9 @@ set colorcolumn=100
 " Remove trailing whitespace on save
 autocmd FileType rust,scala,ocaml,java autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-" =================================Key bindings====================================================
-
 "Toggle rainbow vim
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 nnoremap <C-c> :RainbowToggle<CR>
 " NERDtree open
 map <C-n> :NERDTreeToggle<CR>
-
-" =================================================================================================
 
