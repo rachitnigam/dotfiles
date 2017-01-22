@@ -2,8 +2,55 @@
 set shell=/bin/bash
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin')
 
-" Source plugins
-source ~/.config/nvim/nvim.plugins
+" Vundle setup
+set nocompatible              " be iMproved, required
+filetype on                   " Mac requires this
+filetype off                  " required
+
+" vim-plug autoinstall if not present.
+" From https://github.com/aaronbieber/dotvim/blob/master/vimrc
+let plug_autoinstall = 0
+let plug_readme = expand('~/.local/share/nvim/site/autoload/plug.vim')
+if !filereadable(plug_readme)
+    echo "Installing vim-plug..."
+    echo ""
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let plug_autoinstall = 1
+endif
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'morhetz/gruvbox'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'dag/vim-fish'
+Plug 'luochen1990/rainbow'
+Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
+Plug 'wikitopian/hardmode'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Yggdroot/indentLine'
+Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
+Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'skywind3000/asyncrun.vim'
+Plug 'neomake/neomake'
+Plug 'dracula/vim'
+Plug 'godlygeek/tabular'
+Plug 'altercation/vim-colors-solarized'
+
+call plug#end()
+filetype plugin indent on    " required
+
+if plug_autoinstall
+    echo "Installing packages..."
+    echo ""
+    :PlugInstall
+endif
 
 " ctrlp setup
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
@@ -12,7 +59,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 " Gruvbox initialize
 set background=dark "Setting dark theme
-colors gruvbox
+colors solarized
 
 " Airline init
 let g:airline_theme='badwolf'
@@ -35,17 +82,6 @@ autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " split settings
 set splitbelow
 set splitright
-
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
-
-" Move between windows
-"map <C-J> <C-W>j<C-W>_
-"map <C-K> <C-W>k<C-W>_
-"map <C-H> <C-W>h<C-W>_
-"map <C-L> <C-W>l<C-W>_
 
 " set relative line numbers
 set relativenumber
@@ -93,11 +129,6 @@ set backspace=indent,eol,start
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-"set storage dirs
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-
 " .smt to .lisp
 au BufRead,BufNewFile *.smt set filetype=lisp
 
@@ -115,3 +146,4 @@ nnoremap <C-c> :IndentLinesToggle<CR>
 
 " Run neomake async after file save
 autocmd! BufWritePost * Neomake
+autocmd! BufRead * Neomake

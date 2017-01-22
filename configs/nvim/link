@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Get options.
+LNOPTS=""
+if [ $# -gt 0 ]; then
+  if [[ "$1" == "-f" ]]; then
+    LNOPTS="-f"
+  else
+    echo "Unrecognized option: $1"
+    cat << EOF
+Usage: $me [OPTIONS]
+
+    Options:
+    -f    Force 'ln' to create a new link, even if one already exists with the
+          same name.
+EOF
+    exit 1
+  fi
+fi
+
+if ! hash nvim; then
+  echo "nvim not installed..."
+fi
+
+wd=`pwd`
+
+mkdir -p $HOME/.config/nvim
+
+echo "linking $wd/init.vim to $HOME/.config/nvim/init.vim..."
+
+if [ -e "$linkfile" ]; then
+  echo "Exists"
+else
+  ln -s $LNOPTS "$wd/init.vim" "$HOME/.config/nvim/init.vim"
+
+  if [ $? -eq 0 ]; then
+    echo "OK"
+  else
+    echo "Failed"
+  fi
+fi
