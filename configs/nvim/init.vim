@@ -38,7 +38,7 @@ Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'skywind3000/asyncrun.vim'
-Plug 'neomake/neomake'
+" Plug 'neomake/neomake'
 Plug 'dracula/vim'
 Plug 'godlygeek/tabular'
 Plug 'altercation/vim-colors-solarized'
@@ -53,7 +53,7 @@ if plug_autoinstall
 endif
 
 " ctrlp setup
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar
 set wildignore+=*/target/*
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
@@ -124,6 +124,9 @@ set foldlevelstart=99
 " leader hint
 set showcmd
 
+" leader set to ,
+let mapleader=","
+
 set backspace=indent,eol,start
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
@@ -145,5 +148,5 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 nnoremap <C-c> :IndentLinesToggle<CR>
 
 " Run neomake async after file save
-autocmd! BufWritePost * Neomake
-autocmd! BufRead * Neomake
+"autocmd! BufWritePost * Neomake
+"autocmd! BufRead * Neomake
