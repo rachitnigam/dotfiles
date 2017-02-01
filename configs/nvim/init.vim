@@ -24,7 +24,6 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'dag/vim-fish'
 Plug 'luochen1990/rainbow'
 Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
 Plug 'wikitopian/hardmode'
@@ -33,15 +32,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Yggdroot/indentLine'
 Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'skywind3000/asyncrun.vim'
-" Plug 'neomake/neomake'
-Plug 'dracula/vim'
 Plug 'godlygeek/tabular'
 Plug 'altercation/vim-colors-solarized'
+Plug 'jelera/vim-javascript-syntax'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -57,7 +54,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar
 set wildignore+=*/target/*
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-" Gruvbox initialize
+" Theme init
 set background=dark "Setting dark theme
 colors solarized
 
@@ -132,14 +129,8 @@ set backspace=indent,eol,start
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-" .smt to .lisp
-au BufRead,BufNewFile *.smt set filetype=lisp
-
 " Color 100 column
-set colorcolumn=100
-
-" Remove trailing whitespace on save
-autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
+set colorcolumn=80
 
 "Toggle rainbow vim
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -147,6 +138,13 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 "Indent line turn off color overriding
 nnoremap <C-c> :IndentLinesToggle<CR>
 
-" Run neomake async after file save
-"autocmd! BufWritePost * Neomake
-"autocmd! BufRead * Neomake
+
+" Remove trailing whitespace on save
+autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" .smt to .lisp
+au BufRead,BufNewFile *.smt set filetype=lisp
+
+" Autocompile latex files named main.tex
+au BufWritePost *.tex :silent !pdflatex main.tex
+
