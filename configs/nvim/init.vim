@@ -1,4 +1,4 @@
-" Set shell to bash inside vim
+ "Set shell to bash inside vim
 set shell=/bin/bash
 let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin')
 
@@ -56,7 +56,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 " Theme init
 set background=dark "Setting dark theme
-colors solarized
+colors gruvbox
 
 " Airline init
 let g:airline_theme='badwolf'
@@ -122,7 +122,7 @@ set foldlevelstart=99
 set showcmd
 
 " leader set to ,
-let mapleader=","
+let mapleader="\<Space>"
 
 set backspace=indent,eol,start
 
@@ -135,16 +135,40 @@ set colorcolumn=80
 "Toggle rainbow vim
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
-"Indent line turn off color overriding
-nnoremap <C-c> :IndentLinesToggle<CR>
-
-
 " Remove trailing whitespace on save
 autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " .smt to .lisp
 au BufRead,BufNewFile *.smt set filetype=lisp
 
-" Autocompile latex files named main.tex
-au BufWritePost *.tex :silent !pdflatex main.tex
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" Latex command macros
+augroup latex_macros " {
+  autocmd!
+  autocmd FileType tex :nnoremap <leader>lc :w<CR>:!rubber --pdf --warn all %<CR>
+  autocmd FileType tex :nnoremap <leader>ll :set conceallevel=2 <CR>
+  autocmd FileType tex :nnoremap <leader>lo :set conceallevel=0 <CR>
+augroup END " }
+
+augroup buffer_commands " {
+  autocmd!
+  autocmd FileType * :nnoremap <leader>bn :bn<CR>
+  autocmd FileType * :nnoremap <leader>bp :bp<CR>
+  autocmd FileType * :nnoremap <leader>ba :badd
+  autocmd FileType * :nnoremap <leader>bd :bdelete<CR>
+augroup END " }
+
+augroup save_command " {
+  autocmd!
+  autocmd FileType * :nnoremap <leader>w :w<CR>
+  autocmd FileType * :nnoremap <leader>q :wq<CR>
+augroup END " }
+
+augroup git_command " {
+  autocmd!
+  autocmd FileType * :nnoremap <leader>gd :Gdiff<CR>
+augroup END " }
