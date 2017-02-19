@@ -39,6 +39,7 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'godlygeek/tabular'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -129,9 +130,17 @@ set backspace=indent,eol,start
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
-" Color 100 column
+" Color 80 column
 set colorcolumn=80
+" .smt to .lisp
+au BufRead,BufNewFile *.smt set filetype=lisp
 
+" .quark to .ml
+au BufRead,BufNewFile *.quark set filetype=ocaml
+
+" Remove trailing whitespace on save
+autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
+"
 "Toggle rainbow vim
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
@@ -145,6 +154,10 @@ au BufRead,BufNewFile *.smt set filetype=lisp
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Settings for vim-typescript
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
 
 " Latex command macros
 augroup latex_macros " {
@@ -171,4 +184,16 @@ augroup END " }
 augroup git_command " {
   autocmd!
   autocmd FileType * :nnoremap <leader>gd :Gdiff<CR>
+augroup END " }
+
+augroup make_command " {
+  autocmd!
+  autocmd FileType * :nnoremap <leader>m :make<CR>
+augroup END " }
+
+augroup error_commands " {
+  autocmd!
+  autocmd FileType * :nnoremap <leader>eq :ccl<CR>
+  autocmd FileType * :nnoremap <leader>en :cn<CR>
+  autocmd FileType * :nnoremap <leader>ef :cf<CR>
 augroup END " }
