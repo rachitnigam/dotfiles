@@ -165,6 +165,8 @@ augroup latex_macros " {
   autocmd FileType tex :nnoremap <leader>lc :w<CR>:!rubber --pdf --warn all %<CR>
   autocmd FileType tex :nnoremap <leader>ll :set conceallevel=2 <CR>
   autocmd FileType tex :nnoremap <leader>lo :set conceallevel=0 <CR>
+  autocmd CursorHold *.tex :!rubber --pdf --warn all %<CR>
+
 augroup END " }
 
 " Key bindings for buffers
