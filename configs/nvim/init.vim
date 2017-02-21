@@ -167,6 +167,7 @@ augroup latex_macros " {
   autocmd FileType tex :nnoremap <leader>lo :set conceallevel=0 <CR>
 augroup END " }
 
+" Key bindings for buffers
 augroup buffer_commands " {
   autocmd!
   autocmd FileType * :nnoremap <leader>bn :bn<CR>
@@ -175,12 +176,14 @@ augroup buffer_commands " {
   autocmd FileType * :nnoremap <leader>bd :bdelete<CR>
 augroup END " }
 
+" Key bindings for saving quickly
 augroup save_command " {
   autocmd!
   autocmd FileType * :nnoremap <leader>w :w<CR>
   autocmd FileType * :nnoremap <leader>q :wq<CR>
 augroup END " }
 
+" Key bindings for git fugitive
 augroup git_command " {
   autocmd!
   autocmd FileType * :nnoremap <leader>gd :Gdiff<CR>
