@@ -25,21 +25,17 @@ Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'luochen1990/rainbow'
-Plug 'derekwyatt/vim-scala', { 'for' : 'scala' }
 Plug 'wikitopian/hardmode'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdcommenter'
-Plug 'eagletmt/ghcmod-vim', { 'for' : 'haskell' }
-Plug 'eagletmt/neco-ghc', { 'for' : 'haskell' }
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'skywind3000/asyncrun.vim'
 Plug 'godlygeek/tabular'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jelera/vim-javascript-syntax'
-Plug 'leafgarland/typescript-vim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -165,8 +161,6 @@ augroup latex_macros " {
   autocmd FileType tex :nnoremap <leader>lc :w<CR>:!rubber --pdf --warn all %<CR>
   autocmd FileType tex :nnoremap <leader>ll :set conceallevel=2 <CR>
   autocmd FileType tex :nnoremap <leader>lo :set conceallevel=0 <CR>
-  autocmd CursorHold *.tex :!rubber --pdf --warn all %<CR>
-
 augroup END " }
 
 " Key bindings for buffers
