@@ -149,6 +149,9 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 " .smt to .lisp
 au BufRead,BufNewFile *.smt set filetype=lisp
 
+" set html files to htmlm4
+au BufRead *.html set filetype=htmlm4
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
