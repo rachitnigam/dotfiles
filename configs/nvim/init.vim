@@ -34,8 +34,11 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'godlygeek/tabular'
 Plug 'altercation/vim-colors-solarized'
-Plug 'jelera/vim-javascript-syntax'
 Plug 'sheerun/vim-polyglot'
+Plug 'psosera/ott-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+Plug 'Raimondi/delimitMate'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -50,6 +53,9 @@ endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar
 set wildignore+=*/target/*
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" polyglot disables
+let g:polyglot_disabled = ['tex', 'typescript', 'javascript']
 
 " Theme init
 set background=dark "Setting dark theme
@@ -140,9 +146,6 @@ autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
 "Toggle rainbow vim
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
-" Remove trailing whitespace on save
-autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
-
 " .smt to .lisp
 au BufRead,BufNewFile *.smt set filetype=lisp
 
@@ -154,6 +157,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " Settings for vim-typescript
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
+
+" Don't autoindent tex files.
+au FileType tex setlocal indentexpr=
 
 " Latex command macros
 augroup latex_macros " {
