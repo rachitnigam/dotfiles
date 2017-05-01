@@ -20,7 +20,6 @@ endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -32,13 +31,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'godlygeek/tabular'
 Plug 'altercation/vim-colors-solarized'
 Plug 'sheerun/vim-polyglot'
 Plug 'psosera/ott-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'Raimondi/delimitMate'
+Plug 'lervag/vimtex'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -55,7 +54,7 @@ set wildignore+=*/target/*
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " polyglot disables
-let g:polyglot_disabled = ['tex', 'typescript', 'javascript']
+let g:polyglot_disabled = ['latex', 'typescript', 'javascript']
 
 " Theme init
 set background=dark "Setting dark theme
