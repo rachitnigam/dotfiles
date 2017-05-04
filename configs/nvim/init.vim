@@ -38,6 +38,8 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'Raimondi/delimitMate'
 Plug 'lervag/vimtex'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -47,6 +49,11 @@ if plug_autoinstall
     echo ""
     :PlugInstall
 endif
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ctrlp setup
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar
