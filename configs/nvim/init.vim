@@ -32,14 +32,15 @@ Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'altercation/vim-colors-solarized'
-Plug 'sheerun/vim-polyglot'
-Plug 'psosera/ott-vim'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'Raimondi/delimitMate'
-Plug 'lervag/vimtex'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" Languages
+Plug 'sheerun/vim-polyglot'
+Plug 'lervag/vimtex'
+Plug 'psosera/ott-vim'
+Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
 call plug#end()
 filetype plugin indent on    " required
@@ -50,164 +51,8 @@ if plug_autoinstall
     :PlugInstall
 endif
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" ctrlp setup
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar
-set wildignore+=*/target/*
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" polyglot disables
-let g:polyglot_disabled = ['latex', 'typescript', 'javascript']
-
-" Theme init
-set background=dark "Setting dark theme
-colors gruvbox
-
-" Airline init
-let g:airline_theme='badwolf'
-set laststatus=2
-
-" ctags -- Use tags file in the directory
-set tags=tags;/
-
-" set terminal color to 256
-set t_Co=256
-
-set ts=2
 syntax on
 
-" Settings for hardMode
-let g:HardMode_level='wannabe'
-let g:HardMode_hardmodeMsg='Dont use this!'
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-
-" split settings
-set splitbelow
-set splitright
-
-" set relative line numbers
-set relativenumber
-" Tabs as spaces
-set expandtab
-" Ident using 2 space characters
-set shiftwidth=2
-set softtabstop=2
-
-" indentation fixes
-set autoindent
-set smartindent
-filetype plugin indent on
-
-" show matching parens
-set showmatch
-" show search terms
-set hls
-
-" search as you type
-set incsearch
-
-" make search case insensitive
-set ignorecase
-
-" word wrap
-set linebreak
-" make k and j behave as expected on wrapped lines
-noremap k gk
-noremap j gj
-
-" line numbers, ruler
-set number
-set ruler
-
-" syntax folding, unfolded by default
-set foldmethod=syntax
-set foldlevelstart=99
-
-" leader hint
-set showcmd
-
-" leader set to ,
-let mapleader="\<Space>"
-
-set backspace=indent,eol,start
-
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
-
-" Color 80 column
-set colorcolumn=80
-" .smt to .lisp
-au BufRead,BufNewFile *.smt set filetype=lisp
-
-" .quark to .ml
-au BufRead,BufNewFile *.quark set filetype=ocaml
-
-" Remove trailing whitespace on save
-autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
-"
-"Toggle rainbow vim
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-
-" .smt to .lisp
-au BufRead,BufNewFile *.smt set filetype=lisp
-
-" set html files to htmlm4
-au BufRead *.html set filetype=htmlm4
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" Settings for vim-typescript
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-
-" Don't autoindent tex files.
-au FileType tex setlocal indentexpr=
-
-" Latex command macros
-augroup latex_macros " {
-  autocmd!
-  autocmd FileType tex :nnoremap <leader>lc :w<CR>:!rubber --pdf --warn all %<CR>
-  autocmd FileType tex :nnoremap <leader>ll :set conceallevel=2 <CR>
-  autocmd FileType tex :nnoremap <leader>lo :set conceallevel=0 <CR>
-augroup END " }
-
-" Key bindings for buffers
-augroup buffer_commands " {
-  autocmd!
-  autocmd FileType * :nnoremap <leader>bn :bn<CR>
-  autocmd FileType * :nnoremap <leader>bp :bp<CR>
-  autocmd FileType * :nnoremap <leader>ba :badd
-  autocmd FileType * :nnoremap <leader>bd :bdelete<CR>
-augroup END " }
-
-" Key bindings for saving quickly
-augroup save_command " {
-  autocmd!
-  autocmd FileType * :nnoremap <leader>w :w<CR>
-  autocmd FileType * :nnoremap <leader>q :wq<CR>
-augroup END " }
-
-" Key bindings for git fugitive
-augroup git_command " {
-  autocmd!
-  autocmd FileType * :nnoremap <leader>gd :Gdiff<CR>
-augroup END " }
-
-augroup make_command " {
-  autocmd!
-  autocmd FileType * :nnoremap <leader>m :make<CR>
-augroup END " }
-
-augroup error_commands " {
-  autocmd!
-  autocmd FileType * :nnoremap <leader>eq :ccl<CR>
-  autocmd FileType * :nnoremap <leader>en :cn<CR>
-  autocmd FileType * :nnoremap <leader>ef :cf<CR>
-augroup END " }
+for filename in sort(split(glob('~/.config/nvim/config/*.vim'), '\n'))
+  execute 'source '.filename
+endfor
