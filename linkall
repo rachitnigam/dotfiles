@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env zsh
+
+# Color constants
+yellow="\e[33;40m"
+red="\e[31;40m"
+green="\e[32;40m"
+reset="\e[39;49m"
 
 # Who am I?
 me=`basename $0`
@@ -44,12 +50,12 @@ for dotfile in `find $SCRIPTPATH -mindepth 1 -maxdepth 1`; do
 
   echo -n "Linking $dotfile -> $linkfile... "
   if [ -e "$linkfile" ]; then
-    echo "Exists"
+    echo "${yellow}Exists${reset}"
   else
     ln -s $LNOPTS "$dotfile" "./$linkfile" > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then
-      echo "OK"
+      echo "${green}OK${reset}"
     else
       echo "Failed"
     fi
