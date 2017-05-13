@@ -1,3 +1,6 @@
+" Disable vim polyglot langauges
+let g:polyglot_disabled = ['javascript', 'typescript', 'latex']
+
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
 

@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env zsh
+
+# Color constants
+yellow="\e[33;40m"
+red="\e[31;40m"
+green="\e[32;40m"
+reset="\e[39;49m"
 
 # Get options.
 LNOPTS=""
@@ -19,23 +25,41 @@ EOF
 fi
 
 if ! hash nvim; then
-  echo "nvim not installed..."
+  echo "nvim not installed...exiting"
+  exit 1
 fi
 
 wd=`pwd`
+LINKDIR=$HOME/.config/nvim
+CONFIGS=config
+mkdir -p $LINKDIR/config
 
-mkdir -p $HOME/.config/nvim
-
-echo "linking $wd/init.vim to $HOME/.config/nvim/init.vim..."
-
-if [ -e "$linkfile" ]; then
-  echo "Exists"
+# Linking init.vim
+echo -n "linking $wd/init.vim -> $LINKDIR/init.vim..."
+if [ -e "$LINKDIR/init.vim" ]; then
+  echo "${yellow}Exists${reset}"
 else
-  ln -s $LNOPTS "$wd/init.vim" "$HOME/.config/nvim/init.vim"
+  ln -s $LNOPTS "$wd/init.vim" "$LINKDIR/init.vim"
 
   if [ $? -eq 0 ]; then
-    echo "OK"
+    echo "${green}OK${reset}"
   else
-    echo "Failed"
+    echo "${red}Failed${reset}"
   fi
 fi
+
+# linking configs
+for dotfile in `find $CONFIGS -maxdepth 1 -mindepth 1`; do
+  echo -n "Linking $wd/$dotfile -> $LINKDIR/$dotfile..."
+  if [ -e $LINKDIR/$dotfile ]; then
+    echo "${yellow}Exists${reset}"
+  else
+    ln -s $LNOPTS "$wd/$dotfile" "$LINKDIR/$dotfile" # > /dev/null 2&>1
+
+    if [ $? -eq 0 ]; then
+      echo "${green}OK${reset}"
+    else
+      echo "${red}Failed${reset}"
+    fi
+  fi
+done
