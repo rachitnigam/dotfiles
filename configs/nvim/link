@@ -31,7 +31,7 @@ fi
 
 wd=`pwd`
 LINKDIR=$HOME/.config/nvim
-CONFIGS=config
+CONFIGS=./config
 mkdir -p $LINKDIR/config
 
 # Linking init.vim
