@@ -1,5 +1,5 @@
 " Disable vim polyglot langauges
-let g:polyglot_disabled = ['javascript', 'typescript', 'latex']
+let g:polyglot_disabled = ['javascript', 'latex']
 
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
@@ -48,4 +48,12 @@ let g:HardMode_hardmodeMsg='Dont use this!'
 augroup hardmode_setting
   autocmd!
   autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+augroup end
+
+" Settings for Tsuquyomi
+let g:tsuquyomi_completion_detail = 1
+augroup tsuquyomi_settings
+  " this one is which you're most likely to use?
+  autocmd!
+  autocmd FileType typescript setlocal completeopt+=menu,preview
 augroup end

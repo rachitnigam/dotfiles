@@ -35,11 +35,13 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Languages
 Plug 'sheerun/vim-polyglot'
-Plug 'lervag/vimtex'
-Plug 'psosera/ott-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'lervag/vimtex', {'autoload':{'filetypes':['tex']}}
+Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
 call plug#end()

@@ -45,8 +45,7 @@ augroup END " }
 " Key bindings for typescript
 augroup ts_commands
   autocmd!
-  autocmd FileType ts :nnoremap <leader>tsd :TSDef<CR>
-  autocmd FileType ts :nnoremap <leader>tss :TSSig<CR>
+  autocmd FileType typescript nmap <buffer> <Leader>tt : <C-u>echo tsuquyomi#hint()<CR>
 augroup end
 
 augroup make_commands " {
