@@ -43,6 +43,7 @@ Plug 'Quramy/tsuquyomi'
 Plug 'lervag/vimtex', {'autoload':{'filetypes':['tex']}}
 Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+Plug 'wlangstroth/vim-racket'
 
 call plug#end()
 filetype plugin indent on    " required

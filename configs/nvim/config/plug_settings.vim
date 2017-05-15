@@ -53,7 +53,11 @@ augroup end
 " Settings for Tsuquyomi
 let g:tsuquyomi_completion_detail = 1
 augroup tsuquyomi_settings
-  " this one is which you're most likely to use?
   autocmd!
   autocmd FileType typescript setlocal completeopt+=menu,preview
+augroup end
+
+" Setting for delimMate
+augroup delimMate_settings
+  au FileType racket let b:loaded_delimitMate = 1
 augroup end
