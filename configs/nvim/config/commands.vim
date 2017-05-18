@@ -33,7 +33,7 @@ augroup END " }
 augroup save_commands " {
   autocmd!
   autocmd FileType * :nnoremap <leader>w :w<CR>
-  autocmd FileType * :nnoremap <leader>q :q<CR>
+  autocmd FileType * :nnoremap <leader>q :qa<CR>
 augroup END " }
 
 " Key bindings for git fugitive
