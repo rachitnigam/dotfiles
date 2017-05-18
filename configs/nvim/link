@@ -49,7 +49,7 @@ else
 fi
 
 # linking configs
-for dotfile in `find $CONFIGS -maxdepth 1 -mindepth 1`; do
+for dotfile in `find $CONFIGS -mindepth 1`; do
   echo -n "Linking $wd/$dotfile -> $LINKDIR/$dotfile..."
   if [ -e $LINKDIR/$dotfile ]; then
     echo "${yellow}Exists${reset}"

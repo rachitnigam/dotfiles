@@ -1,6 +1,5 @@
  "Set shell to bash inside vim
 set shell=/bin/bash
-let $PATH = $PATH . ':' . expand('~/Library/Haskell/bin')
 
 " Vundle setup
 set nocompatible              " be iMproved, required
@@ -39,11 +38,11 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Languages
 Plug 'sheerun/vim-polyglot'
-Plug 'Quramy/tsuquyomi'
 Plug 'lervag/vimtex', {'autoload':{'filetypes':['tex']}}
 Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'wlangstroth/vim-racket'
+Plug 'Quramy/tsuquyomi'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -59,3 +58,5 @@ syntax on
 for filename in sort(split(glob('~/.config/nvim/config/*.vim'), '\n'))
   execute 'source '.filename
 endfor
+
+set runtimepath +=~/.config/nvim/config/
