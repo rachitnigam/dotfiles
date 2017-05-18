@@ -84,9 +84,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Add syntax highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Extended globbing mode
 setopt extended_glob
 
@@ -113,3 +110,5 @@ function zle-line-finish
 {
   print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
 }
+
+source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
