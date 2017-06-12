@@ -1,1 +1,104 @@
-nvim/init.vim
+ "Set shell to bash inside vim
+set shell=/bin/bash
+
+" Vundle setup
+set nocompatible              " be iMproved, required
+filetype on                   " Mac requires this
+filetype off                  " required
+
+" vim-plug autoinstall if not present.
+" From https://github.com/aaronbieber/dotvim/blob/master/vimrc
+let plug_autoinstall = 0
+let plug_readme = expand('~/.vim/autoload/plug.vim')
+if !filereadable(plug_readme)
+    echo "Installing vim-plug..."
+    echo ""
+    silent curl -fLo '~/.vim/autoload/plug.vim' --create-dirs \
+    'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    let plug_autoinstall = 1
+endif
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+Plug 'morhetz/gruvbox'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'luochen1990/rainbow'
+Plug 'wikitopian/hardmode'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'scrooloose/nerdcommenter'
+Plug 'Raimondi/delimitMate'
+
+" Languages
+Plug 'sheerun/vim-polyglot'
+Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+Plug 'wlangstroth/vim-racket'
+
+call plug#end()
+filetype plugin indent on    " required
+
+if plug_autoinstall
+    echo "Installing packages..."
+    echo ""
+    :PlugInstall
+endif
+
+syntax on
+
+for filename in sort(split(glob('~/.config/nvim/config/*.vim'), '\n'))
+  execute 'source '.filename
+endfor
+
+" Ident using 2 space characters
+set shiftwidth=2
+set softtabstop=2
+set ts=2
+
+" Tabs as spaces
+set expandtab
+
+"Highlight current line.
+set cursorline
+
+" show matching parens
+set showmatch
+
+" show search terms
+set hls
+
+" search as you type
+set incsearch
+
+" make search case insensitive
+set ignorecase
+
+" word wrap
+set linebreak
+
+" make k and j behave as expected on wrapped lines
+noremap k gk
+noremap j gj
+
+" line numbers, ruler
+set number
+set ruler
+
+" set relative line numbers
+set relativenumber
+
+" syntax folding, unfolded by default
+set foldmethod=syntax
+set foldlevelstart=99
+
+" leader hint
+set showcmd
+
+" leader set to ,
+let mapleader="\<Space>"
+
+set backspace=indent,eol,start
+
+" Color 80 column
+set colorcolumn=80
