@@ -102,3 +102,10 @@ set backspace=indent,eol,start
 
 " Color 80 column
 set colorcolumn=80
+
+" Gruvbox settings
+colors gruvbox
+set background=dark
+
+" Support 256 colors
+let &t_Co=256
