@@ -40,7 +40,7 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym Mod4+Shift+l exec i3lock -f -k -i ~/Pictures/heart.png --datesize=1 --timesize=72
+bindsym Mod4+Shift+l exec "~/.lock.sh"
 
 # change focus
 bindsym $mod+h focus left
@@ -184,3 +184,6 @@ exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
 
 # Disable touchpad on keyboard input
 exec --no-startup-id syndaemon -i 1 -d -R
+
+# Lock screen after inactiviy
+exec xautolock -time 3 -locker '~/.lock.sh' -notify 30 -notifier 'xset dpms force off' -detectsleep &
