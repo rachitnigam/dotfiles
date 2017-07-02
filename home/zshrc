@@ -114,3 +114,10 @@ function zle-line-finish
 source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 fortune | lolcat
+
+# OPAM configuration
+. /home/rachit/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# Setup PATH for dart
+export PATH=/usr/lib/dart/bin:$PATH
+export PATH=/home/rachit/Downloads/node-v8.1.2-linux-x64/bin:$PATH
