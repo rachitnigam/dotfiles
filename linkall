@@ -74,6 +74,12 @@ pushd ~ > /dev/null
 # Create the ~/.config folder
 mkdir -p ./.config
 cd ./.config
+popd > /dev/null
+pushd ~/.config > /dev/null
+
+echo ""
+echo "Creating symlinks for all configuration files in $CONFIGPATH."
+echo ""
 
 for config in `find $CONFIGPATH -mindepth 1 -maxdepth 1 -type d`; do
   linkfile="${config##*/}"
@@ -82,7 +88,7 @@ for config in `find $CONFIGPATH -mindepth 1 -maxdepth 1 -type d`; do
   if [ -e "$linkfile" ] && [ "$LNOPTS" = "" ]; then
     echo "${yellow}Exists${reset}"
   else
-    ln -s $LNOPTS "$config" "./$linkfile" > /dev/null 2>&1
+    ln -s $LNOPTS "$config" -T "./$linkfile" > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then
       echo "${green}OK${reset}"
