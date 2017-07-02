@@ -62,3 +62,32 @@ for dotfile in `find $SCRIPTPATH -mindepth 1 -maxdepth 1 -type f`; do
     fi
   fi
 done
+
+# Link all directories from ./config to ~/.config.
+popd > /dev/null
+pushd `dirname $0` > /dev/null
+CONFIGPATH=`pwd`
+CONFIGPATH="$CONFIGPATH/config"
+popd > /dev/null
+
+pushd ~ > /dev/null
+# Create the ~/.config folder
+mkdir -p ./.config
+cd ./.config
+
+for config in `find $CONFIGPATH -mindepth 1 -maxdepth 1 -type d`; do
+  linkfile="${config##*/}"
+  echo -n "Linking $config -> $linkfile... "
+
+  if [ -e "$linkfile" ] && [ "$LNOPTS" = "" ]; then
+    echo "${yellow}Exists${reset}"
+  else
+    ln -s $LNOPTS "$config" "./$linkfile" > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+      echo "${green}OK${reset}"
+    else
+      echo "${red}Failed${reset}"
+    fi
+  fi
+done
