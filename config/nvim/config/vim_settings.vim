@@ -1,3 +1,5 @@
+" Enable vimball plugin
+packadd vimball
 " Ident using 2 space characters
 set shiftwidth=2
 set softtabstop=2
@@ -57,3 +59,12 @@ set backspace=indent,eol,start
 
 " Color 80 column
 set colorcolumn=80
+
+" Define filetypes
+augroup set_file_types
+  autocmd!
+  au BufRead,BufNewFile *.quark set filetype=ocaml
+  au BufRead,BufNewFile *.smt set filetype=lisp
+  au BufRead *.html set filetype=htmlm4
+  au BufRead *.jarr set filetype=javascript
+augroup end

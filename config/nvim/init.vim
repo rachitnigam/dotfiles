@@ -35,13 +35,18 @@ Plug 'Raimondi/delimitMate'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'gregsexton/MatchTag'
+
+" Org mode
+Plug 'vim-scripts/utl.vim'
+Plug 'vim-scripts/SyntaxRange'
 
 " Languages
 Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex', {'autoload':{'filetypes':['tex']}}
 Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-Plug 'wlangstroth/vim-racket'
+Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
 Plug 'Quramy/tsuquyomi'
 
 call plug#end()
@@ -52,6 +57,9 @@ if plug_autoinstall
     echo ""
     :PlugInstall
 endif
+
+" Disable vim polyglot langauges
+let g:polyglot_disabled = ['javascript', 'latex', 'ocaml']
 
 syntax on
 

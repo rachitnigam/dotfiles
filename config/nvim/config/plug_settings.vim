@@ -1,6 +1,3 @@
-" Disable vim polyglot langauges
-let g:polyglot_disabled = ['javascript', 'latex']
-
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
 
@@ -36,6 +33,9 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Space with NERDCommenter
+let g:NERDCommenter = 1
 
 " Don't autoindent tex files.
 augroup tex_no_indent

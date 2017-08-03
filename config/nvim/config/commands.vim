@@ -4,14 +4,6 @@ augroup no_trailing_whitespace
   autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
 augroup end
 
-augroup set_file_types
-  autocmd!
-  au BufRead,BufNewFile *.quark set filetype=ocaml
-  au BufNewFile,BufRead *.arr set filetype=pyret
-  au BufRead,BufNewFile *.smt set filetype=lisp
-  au BufRead *.html set filetype=htmlm4
-augroup end
-
 " Latex command macros
 augroup latex_commands " {
   autocmd!
@@ -59,3 +51,16 @@ augroup error_commands " {
   autocmd FileType * :nnoremap <leader>en :cn<CR>
   autocmd FileType * :nnoremap <leader>ef :cf<CR>
 augroup END " }
+
+" RainbowToggle conflicts with ocaml syntax highlighting.
+augroup ocaml_hooks
+  autocmd!
+  autocmd FileType ocaml RainbowToggle
+augroup end
+
+" Requires Syntax range to be installed
+augroup html_hooks
+  autocmd!
+  autocmd FileType html call SyntaxRange#Include('<script type=\"text\/javascript\">','</script>','javascript','NonText')
+  autocmd FileType html call SyntaxRange#Include('<style>','</style>','css','NonText')
+augroup end
