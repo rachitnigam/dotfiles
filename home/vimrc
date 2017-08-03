@@ -47,9 +47,7 @@ endif
 
 syntax on
 
-for filename in sort(split(glob('~/.config/nvim/config/*.vim'), '\n'))
-  execute 'source '.filename
-endfor
+let g:polyglot_disabled = ['ocaml']
 
 " Ident using 2 space characters
 set shiftwidth=2
