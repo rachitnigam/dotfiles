@@ -28,7 +28,7 @@ font pango:DejaVu Sans Mono 24
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminator
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -170,9 +170,6 @@ bindsym XF86AudioPrev exec "playerctl previous"
 # Fix screen resolution
 exec --no-startup-id xrandr --output eDP1 --mode 3200X1800 --primary
 
-# Natural scrolling
-exec --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113
-
 # Use Xmodmap at startup
 exec --no-startup-id xmodmap ~/.Xmodmap
 
@@ -183,7 +180,19 @@ exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.jpg
 
 # Disable touchpad on keyboard input
-exec --no-startup-id syndaemon -i 1 -d -R
+#exec_always syndaemon -i 1 -d -R
+
+# Start redshift
+exec --no-startup-id redshift
 
 # Lock screen after inactiviy
 exec_always xautolock -time 3 -locker '~/.lock.sh' -notify 30 -notifier 'xset dpms force off' -detectsleep &
+
+# Turn of bluetooth
+exec_always bluetooth off
+
+exec_always gsettings set org.gnome.desktop.background show-desktop-icons false
+exec_always gsettings set org.nemo.desktop show-desktop-icons false
+exec_always unity-settings-daemon
+
+focus_follows_mouse no
