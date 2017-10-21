@@ -66,5 +66,4 @@ augroup set_file_types
   au BufRead,BufNewFile *.quark set filetype=ocaml
   au BufRead,BufNewFile *.smt set filetype=lisp
   au BufRead *.html set filetype=htmlm4
-  au BufRead *.jarr set filetype=javascript
 augroup end

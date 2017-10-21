@@ -46,8 +46,15 @@ Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex', {'autoload':{'filetypes':['tex']}}
 Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
+"Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
 Plug 'Quramy/tsuquyomi'
+Plug 'vim-scripts/scribble.vim'
+Plug 'vim-scripts/promela.vim'
+Plug 'rgrinberg/vim-ocaml'
+
+" Personal plugins
+Plug '~/git/pyret-lang.vim'
+Plug '~/git/drracket.vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -59,7 +66,7 @@ if plug_autoinstall
 endif
 
 " Disable vim polyglot langauges
-let g:polyglot_disabled = ['javascript', 'latex', 'ocaml']
+let g:polyglot_disabled = ['javascript', 'latex', 'ocaml', 'forth']
 
 syntax on
 
@@ -68,3 +75,5 @@ for filename in sort(split(glob('~/.config/nvim/config/*.vim'), '\n'))
 endfor
 
 set runtimepath +=~/.config/nvim/config/
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"

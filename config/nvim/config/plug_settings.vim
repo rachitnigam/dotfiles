@@ -61,3 +61,7 @@ augroup end
 augroup delimMate_settings
   au FileType racket let b:loaded_delimitMate = 1
 augroup end
+
+" vim-latex-live-preview
+let g:livepreview_previewer = 'evince'
+let g:livepreview_engine = 'latexmk' . ' main'
