@@ -16,6 +16,7 @@
 
 --regex-pyret=/^[ \t]*fun[ \t]+([a-zA-Z0-9_-]+)/\1/f,function/
 --regex-pyret=/^[ \t]*data[ \t]+([a-zA-Z0-9_-]+)/\1/d,data/
+--regex-pyret=/^[ \t]*data[ \t]+([a-zA-Z0-9_-]+)/is-\1/d,data/
 --regex-pyret=/^[ \t]*\|[ \t]*([a-zA-Z0-9_-]+)[^=]*$/\1/d,data/
 --regex-pyret=/^[ \t]*\|[ \t]*([a-zA-Z0-9_-]+)[^=]*$/is-\1/d,data/
 --regex-pyret=/^([a-zA-Z0-9_-]+)[ \t]*=/\1/v,value/
