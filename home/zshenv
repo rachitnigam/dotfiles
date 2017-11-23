@@ -1,14 +1,4 @@
-# Setup PATH for dart
-export PATH=/usr/lib/dart/bin:$PATH
-
-# Node
-export PATH=/home/rachit/Downloads/node-v8.1.2-linux-x64/bin:$PATH
-
-# Go
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$(go env GOPATH)/bin:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-
-export PATH=/home/rachit/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/Downloads/firefox/:$PATH"
+
+export PATH="$HOME/Apps/firefox:$PATH"

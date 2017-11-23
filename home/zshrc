@@ -51,7 +51,7 @@ ZSH_THEME="pygmalion"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode pj)
+plugins=(git vi-mode pj zsh-syntax-highlighting colored-man-pages zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,10 +112,6 @@ function zle-line-finish
 {
   print -n -- "\E]50;CursorShape=0\C-G"  # block cursor
 }
-
-source $HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-fortune | lolcat
 
 # OPAM configuration
 . /home/rachit/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

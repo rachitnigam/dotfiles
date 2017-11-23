@@ -61,3 +61,5 @@ augroup html_hooks
   autocmd FileType html call SyntaxRange#Include('<script type=\"text\/javascript\">','</script>','javascript','NonText')
   autocmd FileType html call SyntaxRange#Include('<style>','</style>','css','NonText')
 augroup end
+
+nnoremap <silent> <C-n> :nohl<CR><C-l>
