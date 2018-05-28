@@ -1,13 +1,13 @@
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" UtilSnips tigger config.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " ctrlp setup
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar,*.pdf,*.aux,*.log
 set wildignore+=*/target/*
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
@@ -16,7 +16,10 @@ set background=dark "Setting dark theme
 colors gruvbox
 
 " Airline init
-let g:airline_theme='badwolf'
+let g:airline_theme='angr'
+let g:airline_section_x=''
+let g:airline_section_y=''
+let g:airline_section_z=''
 set laststatus=2
 
 " ctags -- Use tags file in the directory
@@ -26,29 +29,10 @@ set tags=tags;/
 set t_Co=256
 
 " Toggle rainbow vim
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:rainbow_active = 1
 
 " Space with NERDCommenter
 let g:NERDCommenter = 1
-
-" Don't autoindent tex files.
-augroup tex_no_indent
-  au FileType tex setlocal indentexpr=
-augroup end
-
-" Settings for hardMode
-let g:HardMode_level='wannabe'
-let g:HardMode_hardmodeMsg='Dont use this!'
-augroup hardmode_setting
-  autocmd!
-  autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
-augroup end
 
 " Settings for Tsuquyomi
 let g:tsuquyomi_completion_detail = 1
@@ -62,6 +46,17 @@ augroup delimMate_settings
   au FileType racket let b:loaded_delimitMate = 1
 augroup end
 
-" vim-latex-live-preview
-let g:livepreview_previewer = 'evince'
-let g:livepreview_engine = 'latexmk' . ' main'
+"if !exists('g:deoplete#omni#input_patterns')
+  "let g:deoplete#omni#input_patterns = {}
+"endif
+"let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
+"augroup vimtex_commands
+  "au!
+  "au FileType tex :nnoremap <leader>ll :VimtexCompile<CR>
+  "au FileType tex :nnoremap <leader>lc :VimtexClean<CR>
+  "au FileType tex :nnoremap <leader>lv :VimtexView<CR>
+  "au FileType tex :nnoremap <leader>le :VimtexErrors<CR>
+  "au FileType tex :nnoremap <leader>ls :VimtexStatus<CR>
+"augroup end
+

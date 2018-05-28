@@ -38,6 +38,12 @@ set linebreak
 noremap k gk
 noremap j gj
 
+" map digraph key
+imap <C-q> <C-k>
+
+" define digraphs
+digr bt 8869
+
 " line numbers, ruler
 set number
 set ruler
@@ -65,5 +71,6 @@ augroup set_file_types
   autocmd!
   au BufRead,BufNewFile *.quark set filetype=ocaml
   au BufRead,BufNewFile *.smt set filetype=lisp
-  au BufRead *.html set filetype=htmlm4
+  au BufRead,BufNewFile *.v set filetype=coq
+  au BufRead,BufNewFile *.html set filetype=htmlm4
 augroup end
