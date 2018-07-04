@@ -27,20 +27,15 @@ augroup global_commands " {
 
   " Tag search commands
   au FileType * :nnoremap <leader>] :ts<CR>
+
+  " Get the highlight group under the cursor.
+  au FileType * :nnoremap <leader>sp :call <SID>SynStack()<CR>
 augroup END " }
 
 " Key bindings for git fugitive
 augroup git_commands " {
   autocmd!
   autocmd FileType * :nnoremap <leader>gd :Gdiff<CR>
-augroup END " }
-
-" Latex command macros
-augroup latex_commands " {
-  autocmd!
-  autocmd FileType tex :nnoremap <leader>lc :w<CR>:!rubber --pdf --warn all %<CR>
-  autocmd FileType tex :nnoremap <leader>ll :set conceallevel=2 <CR>
-  autocmd FileType tex :nnoremap <leader>lo :set conceallevel=0 <CR>
 augroup END " }
 
 " Key bindings for typescript
@@ -53,6 +48,7 @@ augroup end
 augroup ocaml_hooks
   autocmd!
   autocmd FileType ocaml RainbowToggle
+  autocmd FileType typescript RainbowToggle
 augroup end
 
 " Requires Syntax range to be installed
@@ -63,3 +59,30 @@ augroup html_hooks
 augroup end
 
 nnoremap <silent> <C-n> :nohl<CR><C-l>
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Search for current selection. From: http://vim.wikia.com/wiki/Search_for_visually_selected_text
+function! s:getSelectedText()
+  let l:old_reg = getreg('"')
+  let l:old_regtype = getregtype('"')
+  norm gvy
+  let l:ret = getreg('"')
+  call setreg('"', l:old_reg, l:old_regtype)
+  exe "norm \<Esc>"
+  return l:ret
+endfunction
+
+vnoremap <silent> * :call setreg("/",
+    \ substitute(<SID>getSelectedText(),
+    \ '\_s\+',
+    \ '\\_s\\+', 'g')
+    \ )<Cr>n
+
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc

@@ -47,15 +47,9 @@ Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
 Plug 'Quramy/tsuquyomi'
-Plug 'vim-scripts/scribble.vim'
-Plug 'vim-scripts/promela.vim'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'copy/deoplete-ocaml'
 Plug 'tmhedberg/SimpylFold'
-
-" color schemes
-Plug 'dylanaraps/wal.vim'
-Plug 'arcticicestudio/nord-vim'
 
 " Personal plugins
 Plug '~/git/pyret-lang.vim'
