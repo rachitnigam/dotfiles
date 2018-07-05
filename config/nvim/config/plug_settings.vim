@@ -6,10 +6,20 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" ctrlp setup
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*.jar,*.pdf,*.aux,*.log
-set wildignore+=*/target/*
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" fzf settings
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+command! ProjectFiles execute 'Files' s:find_git_root()
+nnoremap <c-P> :ProjectFiles<CR>
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let g:fzf_layout = { 'down': '~20%' }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler norelativenumber nonumber
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+if has('nvim')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
 
 " Theme init
 set background=dark "Setting dark theme
@@ -45,18 +55,3 @@ augroup end
 augroup delimMate_settings
   au FileType racket let b:loaded_delimitMate = 1
 augroup end
-
-"if !exists('g:deoplete#omni#input_patterns')
-  "let g:deoplete#omni#input_patterns = {}
-"endif
-"let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
-"augroup vimtex_commands
-  "au!
-  "au FileType tex :nnoremap <leader>ll :VimtexCompile<CR>
-  "au FileType tex :nnoremap <leader>lc :VimtexClean<CR>
-  "au FileType tex :nnoremap <leader>lv :VimtexView<CR>
-  "au FileType tex :nnoremap <leader>le :VimtexErrors<CR>
-  "au FileType tex :nnoremap <leader>ls :VimtexStatus<CR>
-"augroup end
-
