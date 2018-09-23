@@ -55,3 +55,7 @@ augroup end
 augroup delimMate_settings
   au FileType racket let b:loaded_delimitMate = 1
 augroup end
+
+" Markdown setup
+let g:vim_markdown_math = 1
+let g:vim_markdown_frontmatter = 1

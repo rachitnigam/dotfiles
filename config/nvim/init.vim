@@ -1,4 +1,4 @@
- "Set shell to bash inside vim
+"Set shell to bash inside vim
 set shell=/bin/bash
 
 " Vundle setup
@@ -26,6 +26,7 @@ Plug 'luochen1990/rainbow'
 Plug 'wikitopian/hardmode'
 Plug 'tpope/vim-fugitive'
 "Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -38,6 +39,7 @@ Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'gregsexton/MatchTag'
 Plug 'vim-scripts/HTML-AutoCloseTag'
+Plug 'tpope/vim-sensible'
 
 Plug 'vim-scripts/utl.vim'
 Plug 'vim-scripts/SyntaxRange'
@@ -51,10 +53,15 @@ Plug 'Quramy/tsuquyomi'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'copy/deoplete-ocaml'
 Plug 'tmhedberg/SimpylFold'
+Plug 'tedbauer/seashell.vim'
 
 " Personal plugins
 Plug '~/git/pyret-lang.vim'
 Plug '~/git/drracket.vim'
+
+" Ocmal integrations.
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 call plug#end()
 filetype plugin indent on    " required
@@ -66,7 +73,7 @@ if plug_autoinstall
 endif
 
 " Disable vim polyglot langauges
-let g:polyglot_disabled = ['javascript', 'latex', 'ocaml', 'forth']
+let g:polyglot_disabled = ['ocaml', 'javascript', 'latex', 'ocaml', 'forth']
 
 syntax on
 

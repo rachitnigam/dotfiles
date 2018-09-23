@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/rachit/git/sphinx-2018fa/src'
+let g:netrw_dirhist_2='/home/rachit/git/sphinx-2018fa/a1_enigma/Submissions/mrc26'
+let g:netrw_dirhist_3='/home/rachit/git/sphinx-2018fa/a2_adventure/Test'
