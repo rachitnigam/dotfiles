@@ -4,6 +4,7 @@
 [core]
   excludesfile = ~/.gitignore
   editor = nvim
+	pager = diff-so-fancy | less
 [push]
   default = simple
 [alias]
@@ -14,7 +15,24 @@
   prompt = true
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[diff]
+  tool = patdiff
 [difftool]
   prompt = false
-[diff]
-  tool = vimdiff
+[difftool "patdiff"]
+  cmd = patdiff $LOCAL $REMOTE
+
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
