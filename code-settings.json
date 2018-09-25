@@ -1,0 +1,45 @@
+{
+    "telemetry.enableTelemetry": false,
+
+    "workbench.colorTheme": "Gruvbox Dark (Hard)",
+    "workbench.iconTheme": "material-icon-theme",
+
+    "editor.minimap.enabled": false,
+    "editor.occurrencesHighlight": false,
+    "editor.rulers": [ 80 ],
+    "editor.renderWhitespace": "boundary",
+
+    "vim.hlsearch": true,
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-k>": false,
+        "<C-b>": false,
+        "<C-f>": false
+    },
+    "vim.visualstar": true,
+    "vim.enableNeovim": true,
+    "vim.foldfix": true,
+    "material-icon-theme.showUpdateMessage": false,
+    "cSpell.ignoreRegExpList": [
+        "\\\\\\w*(\\[.*?\\])?(\\{.*?\\})?",
+        "\\$.+?\\$"
+    ],
+    "material-icon-theme.folders.color": "#fdd835",
+
+    "latex-workshop.latex.clean.enabled": true,
+    "latex-workshop.chktex.enabled": true,
+    "latex-workshop.view.pdf.viewer": "tab",
+
+    "window.zoomLevel": 0,
+    "cSpell.enabledLanguageIds": [
+        "latex",
+        "markdown",
+        "plaintext",
+        "restructuredtext",
+        "text",
+        "typescriptreact",
+    ],
+    "latex-workshop.message.update.show": false
+}
