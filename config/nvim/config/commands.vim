@@ -53,6 +53,7 @@ augroup end
 augroup ocaml_hooks
   autocmd!
   autocmd FileType ocaml RainbowToggle
+  autocmd FileType coq RainbowToggle
   autocmd FileType typescript RainbowToggle
   autocmd FileType ocaml source ~/.config/nvim/lang/ocaml.vim
 augroup end

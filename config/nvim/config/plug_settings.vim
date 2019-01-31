@@ -59,3 +59,14 @@ augroup end
 " Markdown setup
 let g:vim_markdown_math = 1
 let g:vim_markdown_frontmatter = 1
+
+" vim-gutentags
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['build.sbt']
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_project_info = []
+let g:gutentags_file_list_command = {
+  \ 'markers': {
+    \ 'built.sbt': 'find . -type f | grep "\.scala"',
+    \ },
+  \ }

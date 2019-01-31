@@ -40,9 +40,12 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'gregsexton/MatchTag'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'tpope/vim-sensible'
+Plug 'ludovicchabant/vim-gutentags'
+
 
 Plug 'vim-scripts/utl.vim'
 Plug 'vim-scripts/SyntaxRange'
+Plug 'AndrewRadev/linediff.vim'
 
 " Languages
 Plug 'sheerun/vim-polyglot'
@@ -54,10 +57,11 @@ Plug 'rgrinberg/vim-ocaml'
 Plug 'copy/deoplete-ocaml'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tedbauer/seashell.vim'
+Plug 'tounaishouta/coq.vim'
 
 " Personal plugins
 Plug '~/git/pyret-lang.vim'
-Plug '~/git/drracket.vim'
+Plug 'rachitnigam/drracket.vim'
 
 " Ocmal integrations.
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')

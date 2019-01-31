@@ -71,7 +71,6 @@ augroup set_file_types
   autocmd!
   au BufRead,BufNewFile *.quark set filetype=ocaml
   au BufRead,BufNewFile *.smt set filetype=lisp
-  au BufRead,BufNewFile *.v set filetype=coq
   au BufRead,BufNewFile *.html set filetype=htmlm4
 augroup end
 
@@ -86,3 +85,9 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+" Close preview pane when leaving insert
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Make preview window smaller
+set previewheight=1
