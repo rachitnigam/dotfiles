@@ -86,8 +86,8 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" Close preview pane when leaving insert
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" Close preview window once completion is done.
+autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 
-" Make preview window smaller
+" Make preview window not be obnoxiously big
 set previewheight=1

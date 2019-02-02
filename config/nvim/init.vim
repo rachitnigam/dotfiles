@@ -41,7 +41,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'tpope/vim-sensible'
 Plug 'ludovicchabant/vim-gutentags'
-
+Plug 'davidbeckingsale/writegood.vim'
 
 Plug 'vim-scripts/utl.vim'
 Plug 'vim-scripts/SyntaxRange'
@@ -54,7 +54,6 @@ Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
 Plug 'Quramy/tsuquyomi'
 Plug 'rgrinberg/vim-ocaml'
-Plug 'copy/deoplete-ocaml'
 Plug 'tmhedberg/SimpylFold'
 Plug 'tedbauer/seashell.vim'
 Plug 'tounaishouta/coq.vim'
