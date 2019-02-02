@@ -4,7 +4,6 @@
 [core]
   excludesfile = ~/.gitignore
   editor = nvim
-	pager = diff-so-fancy | less
 [push]
   default = simple
 [alias]
