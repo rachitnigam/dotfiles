@@ -69,8 +69,8 @@ set colorcolumn=80
 " Define filetypes
 augroup set_file_types
   autocmd!
-  au BufRead,BufNewFile *.quark set filetype=ocaml
   au BufRead,BufNewFile *.smt set filetype=lisp
+  au BufRead,BufNewFile *.rkt set filetype=racket
   au BufRead,BufNewFile *.html set filetype=htmlm4
 augroup end
 
@@ -91,3 +91,13 @@ autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 
 " Make preview window not be obnoxiously big
 set previewheight=1
+
+" Save and load folds
+augroup AutoSaveFolds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup end
+
+" Bind ;; to Esc
+imap ;; <Esc>

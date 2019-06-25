@@ -40,7 +40,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'gregsexton/MatchTag'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'tpope/vim-sensible'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'davidbeckingsale/writegood.vim'
 
 Plug 'vim-scripts/utl.vim'
