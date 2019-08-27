@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+#
+set -e
 
 # Color constants
 yellow="\e[33;40m"
@@ -36,6 +38,11 @@ SCRIPTPATH="$SCRIPTPATH/home"
 popd > /dev/null
 
 pushd ~ > /dev/null
+
+if [ ! -e "~/.oh-my-zsh"]; then
+  echo "Oh-my-zsh missing! Installing..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 
 echo "Creating symlinks for all configuration files in $SCRIPTPATH."
 echo ""

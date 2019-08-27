@@ -55,7 +55,7 @@ plugins=(git vi-mode pj zsh-syntax-highlighting colored-man-pages zsh-autosugges
 
 source $ZSH/oh-my-zsh.sh
 
-PROJECT_PATHS=(~/git ~/git/arjun-papers)
+PROJECT_PATHS=(~/git)
 
 # User configuration
 

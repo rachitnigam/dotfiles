@@ -25,7 +25,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'luochen1990/rainbow'
 Plug 'wikitopian/hardmode'
 Plug 'tpope/vim-fugitive'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
@@ -54,8 +53,8 @@ Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
 Plug 'Quramy/tsuquyomi'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'tmhedberg/SimpylFold'
-Plug 'tedbauer/seashell.vim'
 Plug 'tounaishouta/coq.vim'
+Plug 'ekalinin/Dockerfile.vim'
 
 " Personal plugins
 Plug '~/git/pyret-lang.vim'

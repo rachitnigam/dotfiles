@@ -1,5 +1,9 @@
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources={}
+let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips']
+let g:deoplete#omni#input_patterns={}
+let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
 
 " UtilSnips tigger config.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -70,3 +74,10 @@ let g:gutentags_file_list_command = {
     \ 'built.sbt': 'find . -type f | grep "\.scala"',
     \ },
   \ }
+
+" Only run gutentags for scala files
+function! OnlyScala(path) abort
+  echo fnamemodify(a:path, ':e') == 'scala'
+endfunction
+
+let g:gutentags_enabled_user_func = 'OnlyScala'

@@ -92,7 +92,6 @@ autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 " Make preview window not be obnoxiously big
 set previewheight=1
 
-" Save and load folds
 augroup AutoSaveFolds
   autocmd!
   autocmd BufWinLeave * mkview

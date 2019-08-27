@@ -41,15 +41,7 @@ augroup ts_commands
   autocmd FileType typescript nmap <buffer> <Leader>tt : <C-u>echo tsuquyomi#hint()<CR>
 augroup end
 
-" Key bindings for Ocaml
-augroup ocaml_commands
-  autocmd!
-  au FileType ocaml :nnoremap <leader>mt :MerlinTypeOf<CR>
-  au FileType ocaml :nnoremap <leader>mk :MerlinDestruct<CR>
-  au FileType ocaml nmap <leader>mr <Plug>(MerlinRename)
-augroup end
-
-" RainbowToggle conflicts with ocaml syntax highlighting.
+" RainbowToggle conflicts with syntax highlighting.
 augroup ocaml_hooks
   autocmd!
   autocmd FileType ocaml RainbowToggle
@@ -93,3 +85,4 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+nmap <leader>sp :call <SID>SynStack()<CR>
