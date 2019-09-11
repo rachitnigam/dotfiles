@@ -100,3 +100,5 @@ augroup end
 
 " Bind ;; to Esc
 imap ;; <Esc>
+
+set foldmethod=indent
