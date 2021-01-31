@@ -17,11 +17,16 @@ if !filereadable(plug_readme)
     let plug_autoinstall = 1
 endif
 
+" Disable vim polyglot langauges. Have to do it before loading polyglot.
+let g:polyglot_disabled = ['ocaml', 'javascript', 'latex', 'ocaml', 'forth']
+
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'morhetz/gruvbox'
+Plug 'danilo-augusto/vim-afterglow'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'luochen1990/rainbow'
 Plug 'wikitopian/hardmode'
 Plug 'tpope/vim-fugitive'
@@ -39,30 +44,32 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'gregsexton/MatchTag'
 Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'tpope/vim-sensible'
-Plug 'davidbeckingsale/writegood.vim'
-
+Plug 'easymotion/vim-easymotion'
 Plug 'vim-scripts/utl.vim'
 Plug 'vim-scripts/SyntaxRange'
 Plug 'AndrewRadev/linediff.vim'
+Plug 'mbbill/undotree'
+Plug 'preservim/nerdtree'
 
 " Languages
 Plug 'sheerun/vim-polyglot'
+Plug '~/git/vim-p4-syntax'
 Plug 'psosera/ott-vim', {'autoload':{'filetypes':['ott']}}
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'wlangstroth/vim-racket', {'autoload':{'filetypes':['racket']}}
 Plug 'Quramy/tsuquyomi'
 Plug 'rgrinberg/vim-ocaml'
 Plug 'tmhedberg/SimpylFold'
-Plug 'tounaishouta/coq.vim'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
-" Personal plugins
-Plug '~/git/pyret-lang.vim'
-Plug 'rachitnigam/drracket.vim'
-
-" Ocmal integrations.
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" Local languages
+Plug '~/git/futil/tools/vim/futil'
+Plug '~/git/dahlia/tools/vim'
 
 call plug#end()
 filetype plugin indent on    " required
@@ -73,11 +80,10 @@ if plug_autoinstall
     :PlugInstall
 endif
 
-" Disable vim polyglot langauges
-let g:polyglot_disabled = ['ocaml', 'javascript', 'latex', 'ocaml', 'forth']
-
 syntax on
 
+" Execute the vim commands before anything
+execute 'source ~/.config/nvim/vim_settings.vim'
 for filename in sort(split(glob('~/.config/nvim/config/*.vim'), '\n'))
   execute 'source '.filename
 endfor

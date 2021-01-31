@@ -1,9 +1,57 @@
 " Enable deoplete at startup
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources={}
-let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips']
-let g:deoplete#omni#input_patterns={}
-let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
+"call deoplete#custom#var('omni', 'input_patterns', {
+        "\ 'scala': '[^. *\t]\.\w*'
+        "\ })
+call deoplete#custom#option('sources', {
+        \ '_': ['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips', 'LanguageClient'],
+        \ })
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_fuzzy'])
+
+" Language servers
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rls'],
+    \ 'python': ['pyls'],
+    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'cpp': ['clangd'],
+    \ 'scala': ['metals-vim'],
+    \ 'tex': ['texlab'],
+    \ }
+
+"let g:LanguageClient_diagnosticsSignsMax = 0
+let g:LanguageClient_useVirtualText = "CodeLens"
+
+let g:LanguageClient_diagnosticsDisplay =
+      \ {
+      \         1: {
+      \             "name": "Error",
+      \             "texthl": "None",
+      \             "signText": "✖",
+      \             "signTexthl": "LanguageClientErrorSign",
+      \             "virtualTexthl": "Error",
+      \         },
+      \         2: {
+      \             "name": "Warning",
+      \             "texthl": "None",
+      \             "signText": "⚠",
+      \             "signTexthl": "LanguageClientWarningSign",
+      \             "virtualTexthl": "Todo",
+      \         },
+      \         3: {
+      \             "name": "Information",
+      \             "texthl": "None",
+      \             "signText": "ℹ",
+      \             "signTexthl": "LanguageClientInfoSign",
+      \             "virtualTexthl": "Todo",
+      \         },
+      \         4: {
+      \             "name": "Hint",
+      \             "texthl": "None",
+      \             "signText": "➤",
+      \             "signTexthl": "LanguageClientInfoSign",
+      \             "virtualTexthl": "Todo",
+      \         },
+      \     }
 
 " UtilSnips tigger config.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -26,8 +74,9 @@ if has('nvim')
 endif
 
 " Theme init
+colors afterglow
+let g:afterglow_inherit_background=1
 set background=dark "Setting dark theme
-colors gruvbox
 
 " Airline init
 let g:airline_theme='angr'
@@ -64,20 +113,14 @@ augroup end
 let g:vim_markdown_math = 1
 let g:vim_markdown_frontmatter = 1
 
-" vim-gutentags
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['build.sbt']
-let g:gutentags_define_advanced_commands = 1
-let g:gutentags_project_info = []
-let g:gutentags_file_list_command = {
-  \ 'markers': {
-    \ 'built.sbt': 'find . -type f | grep "\.scala"',
-    \ },
-  \ }
+" Styling bad spelling
+hi! link SpellBad Underlined
+hi! link SpellCap Underlined
+hi! link SpellLocal Underlined
 
-" Only run gutentags for scala files
-function! OnlyScala(path) abort
-  echo fnamemodify(a:path, ':e') == 'scala'
-endfunction
+set hidden
 
-let g:gutentags_enabled_user_func = 'OnlyScala'
+" Markdown preview: Disable sync scrolling.
+let g:mkdp_preview_options = {
+    \ 'disable_sync_scroll': 1,
+    \ }
