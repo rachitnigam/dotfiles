@@ -18,7 +18,7 @@ if !filereadable(plug_readme)
 endif
 
 " Disable vim polyglot langauges. Have to do it before loading polyglot.
-let g:polyglot_disabled = ['ocaml', 'javascript', 'latex', 'ocaml', 'forth']
+let g:polyglot_disabled = ['ocaml', 'javascript', 'latex', 'forth', 'go']
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -66,6 +66,7 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'fatih/vim-go'
 
 " Local languages
 Plug '~/git/futil/tools/vim/futil'

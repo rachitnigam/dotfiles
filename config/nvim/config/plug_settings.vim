@@ -124,3 +124,12 @@ set hidden
 let g:mkdp_preview_options = {
     \ 'disable_sync_scroll': 1,
     \ }
+
+" vim-go settings
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_format_strings = 1
