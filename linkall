@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 #
-set -e
+set -eu -o pipefail
 
 # Color constants
 yellow="\e[33;40m"
@@ -9,7 +9,7 @@ green="\e[32;40m"
 reset="\e[39;49m"
 
 # Who am I?
-me=`basename $0`
+me=$(basename $0)
 
 # Get options.
 LNOPTS=""
@@ -32,14 +32,14 @@ fi
 # This appears to be the "best" way to get the canonicalized path to where this
 # script is located, which is, presumably, where all of my dotfiles are.
 # Lifted from http://stackoverflow.com/a/4774063
-pushd `dirname $0` > /dev/null
-SCRIPTPATH=`pwd`
+pushd $(dirname $0) > /dev/null
+SCRIPTPATH="$(pwd)"
 SCRIPTPATH="$SCRIPTPATH/home"
 popd > /dev/null
 
 pushd ~ > /dev/null
 
-if [ ! -e "~/.oh-my-zsh"]; then
+if [ ! -e "$HOME/.oh-my-zsh" ]; then
   echo "Oh-my-zsh missing! Installing..."
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
@@ -48,7 +48,7 @@ echo "Creating symlinks for all configuration files in $SCRIPTPATH."
 echo ""
 
 # Link all the files in the home/ directory to their .home version in ~
-for dotfile in `find $SCRIPTPATH -mindepth 1 -maxdepth 1 -type f`; do
+for dotfile in $(find "$SCRIPTPATH" -mindepth 1 -maxdepth 1 -type f); do
   if [[ "${dotfile##*/}" == "bashrc" ]]; then
     linkfile=".bash_profile"
   else
@@ -59,21 +59,17 @@ for dotfile in `find $SCRIPTPATH -mindepth 1 -maxdepth 1 -type f`; do
 
   if [ -e "$linkfile" ] && [ "$LNOPTS" = "" ]; then
     echo "${yellow}Exists${reset}"
+  elif ln -s $LNOPTS "$dotfile" "./$linkfile" > /dev/null 2>&1; then
+    echo "${green}OK${reset}"
   else
-    ln -s $LNOPTS "$dotfile" "./$linkfile" > /dev/null 2>&1
-
-    if [ $? -eq 0 ]; then
-      echo "${green}OK${reset}"
-    else
-      echo "${red}Failed${reset}"
-    fi
+    echo "${red}Failed${reset}"
   fi
 done
 
 # Link all directories from ./config to ~/.config.
 popd > /dev/null
-pushd `dirname $0` > /dev/null
-CONFIGPATH=`pwd`
+pushd $(dirname $0) > /dev/null
+CONFIGPATH=$(pwd)
 CONFIGPATH="$CONFIGPATH/config"
 popd > /dev/null
 
@@ -88,19 +84,19 @@ echo ""
 echo "Creating symlinks for all configuration files in $CONFIGPATH."
 echo ""
 
-for config in `find $CONFIGPATH -mindepth 1 -maxdepth 1 -type d`; do
+mkdir -p "$CONFIGPATH"
+
+echo "In directory: $(pwd)"
+
+for config in $(find "$CONFIGPATH" -mindepth 1 -maxdepth 1 -type d); do
   linkfile="${config##*/}"
   echo -n "Linking $config -> $linkfile... "
 
   if [ -e "$linkfile" ] && [ "$LNOPTS" = "" ]; then
     echo "${yellow}Exists${reset}"
+  elif ln -s $LNOPTS "$config" "./$linkfile" > /dev/null 2>&1; then
+    echo "${green}OK${reset}"
   else
-    ln -s $LNOPTS "$config" -T "./$linkfile" > /dev/null 2>&1
-
-    if [ $? -eq 0 ]; then
-      echo "${green}OK${reset}"
-    else
-      echo "${red}Failed${reset}"
-    fi
+    echo "${red}Failed${reset}"
   fi
 done
