@@ -5,12 +5,13 @@ set shiftwidth=2
 set softtabstop=2
 set ts=2
 
+filetype plugin indent on
+syntax on
+
 " Tabs as spaces
 set expandtab
 
-if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 " split settings
 set splitbelow
@@ -51,9 +52,11 @@ set ruler
 " set relative line numbers
 set relativenumber
 
-" syntax folding, unfolded by default
-set foldmethod=syntax
+" unfolded by default
 set foldlevelstart=99
+" Treesitter based folding to start
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " leader hint
 set showcmd
@@ -80,12 +83,6 @@ augroup end
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
 endif
 
 " Close preview window once completion is done.
@@ -124,3 +121,6 @@ set signcolumn=yes
 
 set modeline
 set modelineexpr
+
+" Allow jumping out of buffer without saving it.
+set hidden
