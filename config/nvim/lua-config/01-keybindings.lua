@@ -10,7 +10,9 @@ wk.setup {
 
 --- Vim bindings
 wk.register({
-  ["<C-n>"] = { "<cmd>nohl<CR><C-l>", "remove highlight"}
+  ["<C-n>"] = { "<cmd>nohl<CR><C-l>", "remove highlight"},
+  ["<C-P>"] = { "<cmd>Telescope git_files<CR>", "find files" },
+  ["<leader>w"] = { "<cmd>w<CR>", "save" }
 })
 
 ---- Buffers
@@ -39,7 +41,6 @@ wk.register(bindings, { mode = "v", prefix = "<leader>"}) -- normal mode
 
 --- Telescope
 wk.register({
-  ["<C-P>"] = { "<cmd>Telescope find_files<CR>", "files" },
   f = {
     name = "find",
     a = { "<cmd>Telescope<CR>", "all finders" },
@@ -48,14 +49,13 @@ wk.register({
     s = { "<cmd>Telescope grep_string<CR>", "grep string" },
     g = { "<cmd>Telescope git_status<CR>", "git status" },
   }
-})
+}, { prefix = "<leader>" })
 
 --- Trouble
 wk.register({
   t = {
     name = "trouble",
-    t = { "<cmd>Trouble<CR>", "open" },
-    c = { "<cmd>TroubleClose<CR>", "close" },
+    t = { "<cmd>TroubleToggle<CR>", "open" },
     r = { "<cmd>TroubleRefresh<CR>", "refresh" },
   }
 })

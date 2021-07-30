@@ -42,13 +42,16 @@ local function on_attach()
 end
 
 --- RLS
-nvim_lsp.rls.setup {
+nvim_lsp.rust_analyzer.setup {
   on_attach = on_attach,
   settings = {
-    rust = {
-      build_on_save = false,
-      all_features = true,
-      clippy_preference = "on",
+    ["rust-analyzer"] = {
+      experimental = {
+        procAttrMacros = true,
+      },
+      checkOnSave = {
+        command = "clippy",
+      },
     },
   },
 }

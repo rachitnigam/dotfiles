@@ -79,7 +79,6 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
-    preview_cutoff = 15,
     mappings = {
       i = {
         ["<esc>"] = actions.close
