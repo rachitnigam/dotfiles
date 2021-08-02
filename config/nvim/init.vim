@@ -43,6 +43,7 @@ Plug 'folke/which-key.nvim'
 Plug 'Raimondi/delimitMate'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
 
 " Language plugins
 Plug '~/git/calyx/tools/vim/futil'

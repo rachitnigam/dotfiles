@@ -54,9 +54,6 @@ set relativenumber
 
 " unfolded by default
 set foldlevelstart=99
-" Treesitter based folding to start
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 
 " leader hint
 set showcmd
@@ -98,11 +95,12 @@ augroup AutoSaveFolds
 augroup end
 
 set foldmethod=indent
+set smartindent
 
 autocmd BufEnter * :syntax sync fromstart
 
 " https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
-set viewoptions-=curdir
+set viewoptions=folds,cursor
 
 " Show tab characters
 set list

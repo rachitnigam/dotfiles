@@ -22,8 +22,18 @@ wk.register({
     n = { "<cmd>bnext<CR>", "next" },
     p = { "<cmd>bprevious<CR>", "previous" },
     d = { "<cmd>bdelete<CR>", "delete" },
-    l = { "<cmd>buffers<CR>", "list" },
+    l = { "<cmd>Telescope buffers<CR>", "list" },
   }
+}, { prefix = "<leader>" })
+
+--- Git commands
+wk.register({
+  g = {
+    name = "git",
+    d = { "<cmd>Gdiffsplit<CR>", "diff" },
+    b = { "<cmd>Gblame<CR>", "blame" },
+    m = { "<cmd>Git mergetool<CR>", "merge tool" },
+  },
 }, { prefix = "<leader>" })
 
 --- NERD Commenter

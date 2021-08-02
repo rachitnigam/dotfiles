@@ -4,22 +4,14 @@ local nvim_lsp = require'lspconfig'
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", 
   highlight = { enable = true, },
-  indent = { enable = true },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
 }
 
 -- Autocomplete
 require'compe'.setup {
   enabled = true;
-  documentation = true;
+  documentation = {
+    min_width = 30,
+  },
   source = {
     path = true;
     buffer = true;
@@ -51,8 +43,16 @@ require('lualine').setup{
     sources = { 'nvim_lsp' }
   },
   sections = {
-    lualine_y = {get_lsp},
-    lualine_x = {'diagnostics'},
+    lualine_y = {},
+    lualine_x = {{
+      'diagnostics',
+      color_warn = 'EED202',
+    }},
+    lualine_c = {{
+      'filename',
+      status = true,
+      path = 1,
+    }},
   }
 }
 
