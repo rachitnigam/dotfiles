@@ -12,7 +12,8 @@ wk.setup {
 wk.register({
   ["<C-n>"] = { "<cmd>nohl<CR><C-l>", "remove highlight"},
   ["<C-P>"] = { "<cmd>Telescope git_files<CR>", "find files" },
-  ["<leader>w"] = { "<cmd>w<CR>", "save" }
+  ["<leader>w"] = { "<cmd>w<CR>", "save" },
+  ["<leader>nt"] = { "<cmd>NERDTreeToggle<CR>", "Nerd Tree"},
 })
 
 ---- Buffers

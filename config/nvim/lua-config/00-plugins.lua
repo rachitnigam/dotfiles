@@ -2,7 +2,7 @@ local nvim_lsp = require'lspconfig'
 
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", 
+  ensure_installed = "maintained",
   highlight = { enable = true, },
 }
 
@@ -79,10 +79,28 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
+    layout_strategy = 'vertical',
+    layout_config = {
+      vertical = {
+        preview_height = 0.3,
+      }
+    },
     mappings = {
       i = {
         ["<esc>"] = actions.close
       },
     },
-  }
+  },
+  pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ["<c-d>"] = "delete_buffer",
+        },
+        n = {
+          ["<c-d>"] = require("telescope.actions").delete_buffer,
+        }
+      }
+    },
+  },
 }

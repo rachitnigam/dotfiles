@@ -39,6 +39,7 @@ local function on_attach()
       f = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "quickfix" },
     },
   }, { buffer = 0 })
+
 end
 
 --- Rust analyzer

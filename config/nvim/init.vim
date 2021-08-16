@@ -35,6 +35,7 @@ Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sainnhe/gruvbox-material'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Quality of life plugins
 Plug 'tpope/vim-surround'
@@ -44,10 +45,13 @@ Plug 'Raimondi/delimitMate'
 Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
+Plug 'preservim/nerdtree'
 
 " Language plugins
+Plug 'pest-parser/pest.vim'
 Plug '~/git/calyx/tools/vim/futil'
 Plug '~/git/dahlia/tools/vim'
+Plug '~/git/filament/tools/vim'
 
 call plug#end()
 

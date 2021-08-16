@@ -122,3 +122,25 @@ set modelineexpr
 
 " Allow jumping out of buffer without saving it.
 set hidden
+
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+map <leader>sp :call SynStack()<CR>
+
+" Remove trailing whitespace on save
+augroup no_trailing_whitespace
+  autocmd!
+  autocmd FileType * autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup end
+
+" Enable spell for documents
+augroup spell_hooks
+  autocmd!
+  autocmd FileType markdown,tex set spell
+augroup END
+" Spelling styling
+highlight SpellBad cterm=underline ctermfg=red
