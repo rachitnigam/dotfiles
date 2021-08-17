@@ -87,21 +87,41 @@ EOF
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
-" Set updatetime for CursorHold
-" 300ms of no cursor movement to trigger CursorHold
-set updatetime=500
-" Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
+" ================= UltiSnip ==============
+" Disable default mappings for UltiSnips
+let g:UltiSnipsListSnippets = "<NUL>"
+let g:UltiSnipsExpandTrigger = "<NUL>"
 
+" Use enter to expand snippet
+function! SmartEnter()
+  if UltiSnips#CanExpandSnippet()
+    return UltiSnips#ExpandSnippet()
+  else
+    return "\<CR>"
+  endif
+endfunction
+imap <CR> <C-R>=SmartEnter()<CR>
+
+" Smart tab completion
 function! SmartTab()
-  if UltiSnip#CanJumpForwards()
-    return UltiSnip#JumpForwards()
-  elseif UltiSnips#ExpandSnippet()
-    return UltiSnip#ExpandTrigger()
+  if UltiSnips#CanJumpForwards()
+    return UltiSnips#JumpForwards()
   elseif pumvisible()
     return "\<C-n>"
   else
     return "\<TAB>"
+  endif
 endfunction
+imap <TAB> <C-R>=SmartTab()<CR>
 
-inoremap <TAB> :call SmartTab()<CR>
+" Smart shift tab completion
+function! SmartSTab()
+  if UltiSnips#CanJumpBackwards()
+    return UltiSnips#JumpBackwards()
+  elseif pumvisible()
+    return "\<C-p>"
+  else
+    return "\<S-TAB>"
+  endif
+endfunction
+imap <S-TAB> <C-R>=SmartSTab()<CR>
