@@ -144,3 +144,6 @@ augroup spell_hooks
 augroup END
 " Spelling styling
 highlight SpellBad cterm=underline ctermfg=red
+
+" Maximum number of items to display in completion menu
+set pumheight=12
