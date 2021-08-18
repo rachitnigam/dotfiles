@@ -36,7 +36,7 @@ require('lualine').setup{
     lualine_c = {{
       'filename',
       status = true,
-      path = 1,
+      path = 2,
     }},
   }
 }

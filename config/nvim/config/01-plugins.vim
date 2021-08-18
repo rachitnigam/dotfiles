@@ -30,3 +30,6 @@ let g:NERDSpaceDelims = 1  " spaces after comment
 autocmd! FileType Trouble
 autocmd  FileType Trouble set laststatus=0 noshowmode noruler norelativenumber nonumber
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
+
+" ================ DelimitMate =================
+let delimitMate_expand_cr = 1 " Natural behavior when pressing enter.
