@@ -94,13 +94,16 @@ let g:UltiSnipsExpandTrigger = "<NUL>"
 
 " Use enter to expand snippet
 function! SmartEnter()
+  echo "hi"
   if UltiSnips#CanExpandSnippet()
     return UltiSnips#ExpandSnippet()
   else
     return "\<CR>"
   endif
 endfunction
-imap <CR> <C-R>=SmartEnter()<CR>
+imap <expr> <CR> delimitMate#WithinEmptyPair() ?
+             \ "\<Plug>delimitMateCR" :
+             \ "\<C-R>=SmartEnter()<CR>"
 
 " Smart tab completion
 function! SmartTab()

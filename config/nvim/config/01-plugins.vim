@@ -32,4 +32,4 @@ autocmd  FileType Trouble set laststatus=0 noshowmode noruler norelativenumber n
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler number relativenumber
 
 " ================ DelimitMate =================
-let delimitMate_expand_cr = 1 " Natural behavior when pressing enter.
+let delimitMate_expand_cr = 2 " Natural behavior when pressing enter.
