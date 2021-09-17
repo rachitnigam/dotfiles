@@ -2,7 +2,7 @@ local nvim_lsp = require'lspconfig'
 
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = { "rust", "bash", "toml", "json", "cpp", "verilog", "go", "lua", "regex", "vim", "yaml" },
   highlight = { enable = true, },
 }
 
@@ -16,29 +16,11 @@ require'compe'.setup {
     path = true;
     buffer = true;
     calc = true;
-    nvim_lsp = true;
+    nvim_lsp = {
+      priority = 1;
+    };
     ultisnips = true;
   };
-}
-
--- Lualine configuration
-require('lualine').setup{
-  options = {
-    theme = 'gruvbox',
-    sources = { 'nvim_lsp' }
-  },
-  sections = {
-    lualine_y = {},
-    lualine_x = {{
-      'diagnostics',
-      color_warn = 'EED202',
-    }},
-    lualine_c = {{
-      'filename',
-      status = true,
-      path = 2,
-    }},
-  }
 }
 
 --- Trouble.vim

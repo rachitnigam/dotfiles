@@ -73,6 +73,18 @@ nvim_lsp.metals.setup{
   on_attach = on_attach,
 }
 
+--- Pyls
+nvim_lsp.pylsp.setup{
+  on_attach = on_attach,
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = { exclude = {'E501'} },
+      }
+    }
+  }
+}
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   require('lsp_extensions.workspace.diagnostic').handler, {
@@ -94,8 +106,7 @@ let g:UltiSnipsExpandTrigger = "<NUL>"
 
 " Use enter to expand snippet
 function! SmartEnter()
-  echo "hi"
-  if UltiSnips#CanExpandSnippet()
+  if pumvisible() && UltiSnips#CanExpandSnippet()
     return UltiSnips#ExpandSnippet()
   else
     return "\<CR>"

@@ -33,3 +33,10 @@ autocmd  FileType Trouble set laststatus=0 noshowmode noruler norelativenumber n
 
 " ================ DelimitMate =================
 let delimitMate_expand_cr = 2 " Natural behavior when pressing enter.
+
+" ================ vim-airline ==================
+let g:airline_theme='gruvbox_material'
+let g:airline_section_x=''
+let g:airline_section_y=''
+let g:airline_section_z=''
+set laststatus=2

@@ -16,6 +16,14 @@ wk.register({
   ["<leader>nt"] = { "<cmd>NERDTreeToggle<CR>", "Nerd Tree"},
 })
 
+--- Language, non-LSP bindings
+wk.register({
+  l = {
+    name = "language",
+    t = { "<cmd>Telescope tags<CR>", "ctags" },
+  }
+}, { prefix = "<leader>" })
+
 ---- Buffers
 wk.register({
   b = {

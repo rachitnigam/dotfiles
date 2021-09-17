@@ -31,7 +31,9 @@ Plug 'folke/which-key.nvim'
 
 " Visuals
 Plug 'sainnhe/everforest'
-Plug 'hoob3rt/lualine.nvim'
+" Plug 'hoob3rt/lualine.nvim'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sainnhe/gruvbox-material'

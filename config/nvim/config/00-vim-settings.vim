@@ -76,6 +76,11 @@ augroup set_file_types
   au BufRead,BufNewFile *.v set filetype=verilog
 augroup end
 
+augroup disable_tex_indent
+  autocmd!
+  au BufRead,BufNewFile *.tex filetype  plugin indent off
+augroup end
+
 " Use silver searcher if present.
 if executable('ag')
   " Use ag over grep
@@ -144,6 +149,8 @@ augroup spell_hooks
 augroup END
 " Spelling styling
 highlight SpellBad cterm=underline ctermfg=red
+" Ignore TeX commands for spell
+let g:tex_comment_nospell=1
 
 " Maximum number of items to display in completion menu
 set pumheight=12
