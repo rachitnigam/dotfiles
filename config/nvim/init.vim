@@ -51,9 +51,11 @@ Plug 'preservim/nerdtree'
 
 " Language plugins
 Plug 'pest-parser/pest.vim'
+Plug 'wlangstroth/vim-racket'
+Plug '~/git/dahlia/tools/vim/fuse'
 Plug '~/git/calyx/tools/vim/futil'
-Plug '~/git/dahlia/tools/vim'
 Plug '~/git/filament/tools/vim'
+Plug '~/git/circt/llvm/mlir/utils/vim'
 
 call plug#end()
 

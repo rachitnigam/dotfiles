@@ -40,8 +40,11 @@ wk.register({
   g = {
     name = "git",
     d = { "<cmd>Gdiffsplit<CR>", "diff" },
-    b = { "<cmd>Gblame<CR>", "blame" },
+    b = { "<cmd>Git blame<CR>", "blame" },
     m = { "<cmd>Git mergetool<CR>", "merge tool" },
+    a = { "<cmd>Git add %<CR>", "add" },
+    pl = { "<cmd>Git pull<CR>", "pull" },
+    co = { "<cmd>Git commit<CR>", "commit" },
   },
 }, { prefix = "<leader>" })
 

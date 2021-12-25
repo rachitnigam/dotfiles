@@ -85,6 +85,11 @@ nvim_lsp.pylsp.setup{
   }
 }
 
+--- Racket
+nvim_lsp.racket_langserver.setup{
+  on_attach = on_attach,
+}
+
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   require('lsp_extensions.workspace.diagnostic').handler, {

@@ -2,7 +2,20 @@ local nvim_lsp = require'lspconfig'
 
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "rust", "bash", "toml", "json", "cpp", "verilog", "go", "lua", "regex", "vim", "yaml" },
+  ensure_installed = {
+    "rust",
+    "bash",
+    "toml",
+    "json",
+    "cpp",
+    "verilog",
+    "go",
+    "lua",
+    "regex",
+    "vim",
+    "yaml",
+    "python",
+  },
   highlight = { enable = true, },
 }
 
@@ -26,7 +39,7 @@ require'compe'.setup {
 --- Trouble.vim
 require('trouble').setup{
   position = "right",
-  width = 80,
+  width = 60,
   actions_keys = {
     previous = "d[", -- preview item
     next = "d]" -- next item
