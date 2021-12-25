@@ -78,7 +78,7 @@ augroup end
 
 augroup disable_tex_indent
   autocmd!
-  au BufRead,BufNewFile *.tex filetype  plugin indent off
+  au BufRead,BufNewFile *.tex filetype indent off
 augroup end
 
 " Use silver searcher if present.
