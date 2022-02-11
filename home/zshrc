@@ -97,6 +97,15 @@ setopt extended_glob
 # Set to vi mode
 bindkey -v
 
+# Yank to the system clipboard
+function vi-yank-xclip {
+    zle vi-yank
+   echo "$CUTBUFFER" | pbcopy -i
+}
+
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
 # Reduce delay in when switching modes
 export KEYTIMEOUT=1
 
@@ -124,3 +133,9 @@ git_current_branch () {
   fi
   echo ${ref#refs/heads/}
 }
+
+# Cargo aliases
+alias cb="cargo build"
+alias cba="cargo build --all"
+alias cr="cargo run"
+alias cfa="cargo fmt --all"
