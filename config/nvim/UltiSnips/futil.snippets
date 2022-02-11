@@ -6,3 +6,11 @@ component main() -> () {
   control {}
 }
 endsnippet
+
+snippet upd "update" b
+group $1 {
+  $2.write_en = 1'd1;
+	$2.in = $3;
+	$1[done] = $2.done;
+}
+endsnippet

@@ -76,10 +76,14 @@ augroup set_file_types
   au BufRead,BufNewFile *.v set filetype=verilog
 augroup end
 
+" Disable TeX autoindent
 augroup disable_tex_indent
   autocmd!
   au BufRead,BufNewFile *.tex filetype indent off
 augroup end
+let g:tex_indent_items=0
+let g:tex_indent_and=0
+let g:tex_indent_brace=0
 
 " Use silver searcher if present.
 if executable('ag')

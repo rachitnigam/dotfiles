@@ -26,7 +26,7 @@ local function on_attach()
       a = { "<cmd>Telescope lsp_code_actions<CR>", "action" },
       r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
       f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "format" },
-      e = { "<cmd>lua vim.lsp.diagnostic.show_line_diagnostic()<CR>", "line diagnostic" },
+      e = { "<cmd>lua vim.diagnostic.show_line_diagnostic()<CR>", "line diagnostic" },
     },
   }, { prefix = "<leader>", buffer = 0 })
 
@@ -34,9 +34,9 @@ local function on_attach()
   wk.register({
     d = {
       name = "errors",
-      ["["] = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", "previous error" },
-      ["]"] = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next error" },
-      f = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "quickfix" },
+      ["["] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "previous error" },
+      ["]"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "next error" },
+      f = { "<cmd>lua vim.diagnostic.set_loclist()<CR>", "quickfix" },
     },
   }, { buffer = 0 })
 
@@ -53,8 +53,13 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+local function rust_on_attach()
+  on_attach()
+  require'lsp_extensions'.inlay_hints{}
+end
+
 nvim_lsp.rust_analyzer.setup {
-  on_attach = on_attach,
+  on_attach = rust_on_attach,
   capabilities = capabilities,
   settings = {
     ["rust-analyzer"] = {
@@ -78,9 +83,7 @@ nvim_lsp.pylsp.setup{
   on_attach = on_attach,
   settings = {
     pylsp = {
-      plugins = {
-        pycodestyle = { exclude = {'E501'} },
-      }
+      configurationSources = {'flake8'},
     }
   }
 }
@@ -92,17 +95,13 @@ nvim_lsp.racket_langserver.setup{
 
 -- Enable diagnostics
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  require('lsp_extensions.workspace.diagnostic').handler, {
-    virtual_text = true,
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = { spacing = 4, },
     signs = true,
     update_in_insert = true,
   }
 )
 EOF
-
-" Enable type inlay hints
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 
 " ================= UltiSnip ==============
 " Disable default mappings for UltiSnips

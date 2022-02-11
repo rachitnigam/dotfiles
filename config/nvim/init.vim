@@ -5,7 +5,7 @@ set nocompatible
 filetype on                   " Mac requires this
 filetype off                  " required
 
-call plug#begin('~/.local/share/nvim/plugged-new')
+call plug#begin('~/.local/share/nvim/plugged')
 
 " FZF for quick file jumps
 Plug 'nvim-lua/popup.nvim'
@@ -48,6 +48,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Language plugins
 Plug 'pest-parser/pest.vim'
