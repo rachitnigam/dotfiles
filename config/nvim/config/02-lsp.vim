@@ -110,7 +110,7 @@ let g:UltiSnipsExpandTrigger = "<NUL>"
 
 " Use enter to expand snippet
 function! SmartEnter()
-  if pumvisible() && UltiSnips#CanExpandSnippet()
+  if pumvisible() && complete_info().selected != -1 && UltiSnips#CanExpandSnippet()
     return UltiSnips#ExpandSnippet()
   else
     return "\<CR>"
