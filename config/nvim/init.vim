@@ -22,8 +22,9 @@ Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'folke/trouble.nvim'
 
 " Autocomplete
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'honza/vim-snippets'
 
 " Keybindings

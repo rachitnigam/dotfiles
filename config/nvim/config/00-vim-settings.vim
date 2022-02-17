@@ -80,10 +80,12 @@ augroup end
 augroup disable_tex_indent
   autocmd!
   au BufRead,BufNewFile *.tex filetype indent off
+  au FileType plaintex,tex,context setlocal indentexpr=
 augroup end
+let g:tex_flavor = "latex"
 let g:tex_indent_items=0
-let g:tex_indent_and=0
 let g:tex_indent_brace=0
+let g:tex_itemize_env=''
 
 " Use silver searcher if present.
 if executable('ag')
