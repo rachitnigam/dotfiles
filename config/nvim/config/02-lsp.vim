@@ -52,6 +52,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   }
 }
+require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local function rust_on_attach()
   on_attach()
@@ -72,6 +73,9 @@ nvim_lsp.rust_analyzer.setup {
     },
   },
 }
+
+--- nvim-cmp capabilities
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 --- Metals
 nvim_lsp.metals.setup{
@@ -102,32 +106,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 EOF
-
-" ================= UltiSnip ==============
-" Disable default mappings for UltiSnips
-let g:UltiSnipsListSnippets = "<NUL>"
-let g:UltiSnipsExpandTrigger = "<NUL>"
-
-" Smart tab completion
-function! SmartTab()
-  if UltiSnips#CanJumpForwards()
-    return UltiSnips#JumpForwards()
-  elseif pumvisible()
-    return "\<C-n>"
-  else
-    return "\<TAB>"
-  endif
-endfunction
-imap <TAB> <C-R>=SmartTab()<CR>
-
-" Smart shift tab completion
-function! SmartSTab()
-  if UltiSnips#CanJumpBackwards()
-    return UltiSnips#JumpBackwards()
-  elseif pumvisible()
-    return "\<C-p>"
-  else
-    return "\<S-TAB>"
-  endif
-endfunction
-imap <S-TAB> <C-R>=SmartSTab()<CR>

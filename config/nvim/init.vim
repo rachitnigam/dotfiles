@@ -23,6 +23,10 @@ Plug 'folke/trouble.nvim'
 
 " Autocomplete
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'honza/vim-snippets'
@@ -58,6 +62,7 @@ Plug '~/git/dahlia/tools/vim/fuse'
 Plug '~/git/calyx/tools/vim/futil'
 Plug '~/git/filament/tools/vim'
 Plug '~/git/circt/llvm/mlir/utils/vim'
+Plug 'psosera/ott-vim'
 
 call plug#end()
 
