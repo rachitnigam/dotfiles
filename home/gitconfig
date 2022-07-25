@@ -6,6 +6,7 @@
   editor = nvim
 [push]
   default = simple
+  autoSetupRemote = true
 [pull]
   rebase = true
 [alias]
@@ -24,18 +25,18 @@
   cmd = patdiff $LOCAL $REMOTE
 
 [color]
-	ui = true
+  ui = true
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
 [color "diff"]
-	meta = yellow
-	frag = magenta bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+  meta = yellow
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
 [init]
-	defaultBranch = main
+  defaultBranch = main
