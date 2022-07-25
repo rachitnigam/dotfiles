@@ -16,6 +16,27 @@ wk.register({
   ["<leader>nt"] = { "<cmd>NERDTreeToggle<CR>", "Nerd Tree"},
 })
 
+--- Quick fix window
+wk.register({
+  q = {
+    name = "quickfix",
+    n = { "<cmd>cnext<CR>", "next" },
+    p = { "<cmd>cprev<CR>", "prev" },
+    o = { "<cmd>copen<CR>", "open" },
+    q = { "<cmd>cclose<CR>", "close" },
+  }
+}, { prefix = "<leader>" })
+
+--- Plug keys
+wk.register({
+  p = {
+    name = "vim-plug",
+    i = { "<cmd>PlugInstall<CR>", "install" },
+    c = { "<cmd>PlugClean<CR>", "clean" },
+    s = { "<cmd>PlugSnapshot ~/.config/nvim/snapshot.vim<CR>", "snapshot" },
+  }
+}, { prefix = "<leader>" })
+
 --- Language, non-LSP bindings
 wk.register({
   l = {

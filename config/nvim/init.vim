@@ -7,7 +7,7 @@ filetype off                  " required
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" FZF for quick file jumps
+" Telescope picker
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -30,6 +30,9 @@ Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'honza/vim-snippets'
+
+" Github copilot
+Plug 'github/copilot.vim'
 
 " Keybindings
 Plug 'folke/which-key.nvim'
@@ -54,15 +57,19 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 " Language plugins
 Plug 'pest-parser/pest.vim'
 Plug 'wlangstroth/vim-racket'
-Plug '~/git/dahlia/tools/vim/fuse'
-Plug '~/git/calyx/tools/vim/futil'
-Plug '~/git/filament/tools/vim'
-Plug '~/git/circt/llvm/mlir/utils/vim'
 Plug 'psosera/ott-vim'
+Plug 'rhysd/vim-llvm'
+Plug '~/git/dahlia/tools/vim/fuse'
+Plug '~/git/filament/tools/vim/filament'
+Plug '~/git/calyx/tools/vim/futil'
+" Plug '~/git/circt/llvm/mlir/utils/vim/'
+" Plug '~/git/circt/llvm/llvm/utils/vim/'
 
 call plug#end()
 

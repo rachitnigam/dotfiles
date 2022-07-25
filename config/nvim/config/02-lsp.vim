@@ -23,7 +23,7 @@ local function on_attach()
       s = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "document symbol" },
       w = { "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", "workspace symbol" },
       d = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "declaration" },
-      a = { "<cmd>Telescope lsp_code_actions<CR>", "action" },
+      a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "action" },
       r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
       f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "format" },
       e = { "<cmd>lua vim.diagnostic.show_line_diagnostic()<CR>", "line diagnostic" },
@@ -94,6 +94,11 @@ nvim_lsp.pylsp.setup{
 
 --- Racket
 nvim_lsp.racket_langserver.setup{
+  on_attach = on_attach,
+}
+
+--- Clangd
+nvim_lsp.clangd.setup {
   on_attach = on_attach,
 }
 
