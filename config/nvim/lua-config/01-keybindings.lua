@@ -33,7 +33,8 @@ wk.register({
     name = "vim-plug",
     i = { "<cmd>PlugInstall<CR>", "install" },
     c = { "<cmd>PlugClean<CR>", "clean" },
-    s = { "<cmd>PlugSnapshot ~/.config/nvim/snapshot.vim<CR>", "snapshot" },
+    s = { "<cmd>PlugSnapshot ~/.config/nvim/snapshot.vim<CR>", "take snapshot" },
+    l = { "<cmd>so ~/.config/nvim/snapshot.vim<CR>", "load snapshot" },
   }
 }, { prefix = "<leader>" })
 
