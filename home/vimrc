@@ -6,6 +6,9 @@ set nocompatible              " be iMproved, required
 filetype on                   " Mac requires this
 filetype off                  " required
 
+" Need this before loading polyglot
+let g:polyglot_disabled = ['ocaml']
+
 " vim-plug autoinstall if not present.
 " From https://github.com/aaronbieber/dotvim/blob/master/vimrc
 let plug_autoinstall = 0
@@ -45,8 +48,6 @@ if plug_autoinstall
 endif
 
 syntax on
-
-let g:polyglot_disabled = ['ocaml']
 
 " Ident using 2 space characters
 set shiftwidth=2
