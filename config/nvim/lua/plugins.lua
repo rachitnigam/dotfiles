@@ -18,18 +18,54 @@ require'nvim-treesitter.configs'.setup {
   },
   highlight = { enable = true, },
 }
+--
+-- Lualine
+require('lualine').setup()
+
+-- Color theme
+require('onedark').setup  {
+    style = 'dark',
+    transparent = false,  -- Show/hide background
+    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+
+    -- Change code style ---
+    -- Options are italic, bold, underline, none
+    -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+    code_style = {
+        comments = 'italic',
+        keywords = 'none',
+        functions = 'none',
+        strings = 'none',
+        variables = 'none'
+    },
+
+    -- Lualine options --
+    lualine = {
+        transparent = false, -- lualine center bar transparency
+    },
+
+    -- Custom Highlights --
+    colors = {}, -- Override default colors
+    highlights = {}, -- Override highlight groups
+
+    -- Plugins Config --
+    diagnostics = {
+        darker = true, -- darker colors for diagnostic
+        undercurl = true,   -- use undercurl instead of underline for diagnostics
+        background = true,    -- use background color for virtual text
+    },
+}
+require('onedark').load()
+
+
 
 -- Autocomplete
 
---- Mapping for UltiSnips triggers
-vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
-vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
-vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
-vim.g.UltiSnipsRemoveSelectModeMappings = 0
-
---- UltiSnips source for cmp
-require("cmp_nvim_ultisnips").setup{}
+-- LuaSnip setup
+local luasnip_ok, luasnip_vscode = pcall(require, "luasnip.loaders.from_vscode")
+if luasnip_ok then
+  luasnip_vscode.lazy_load() -- loads friendly-snippets
+end
 
 -- Helper method to replace termcodes in mappings
 local t = function(str)
@@ -37,14 +73,18 @@ local t = function(str)
 end
 
 local cmp = require'cmp'
+local luasnip_ok, luasnip = pcall(require, 'luasnip')
+
 cmp.setup({
   snippet = {
     expand = function(args)
-      vim.fn["UltiSnips#Anon"](args.body)
+      if luasnip_ok then
+        luasnip.lsp_expand(args.body)
+      end
     end,
   },
   sources = cmp.config.sources({
-    { name = 'ultisnips' },
+    { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
   }, {
@@ -62,15 +102,15 @@ cmp.setup({
         i = function(fallback)
             if cmp.visible() then
                 cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+            elseif luasnip_ok and luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
         end,
         s = function(fallback)
-            if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+            if luasnip_ok and luasnip.jumpable(1) then
+                luasnip.jump(1)
             else
                 fallback()
             end
@@ -87,15 +127,15 @@ cmp.setup({
         i = function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-            elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+            elseif luasnip_ok and luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
         end,
         s = function(fallback)
-            if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+            if luasnip_ok and luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -152,13 +192,13 @@ cmp.setup({
   },
 })
 
---- Trouble.vim
+--- Trouble.nvim
 require('trouble').setup{
   position = "right",
   width = 60,
-  actions_keys = {
-    previous = "d[", -- preview item
-    next = "d]" -- next item
+  keys = {
+    ["d["] = "prev", -- previous item
+    ["d]"] = "next"  -- next item
   }
 }
 
@@ -192,7 +232,7 @@ require('telescope').setup{
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter
       override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case" the default case_mode is "smart_case"
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
     }
   },
   pickers = {
@@ -210,3 +250,17 @@ require('telescope').setup{
 }
 require('telescope').load_extension('fzf')
 require("telescope").load_extension("ui-select")
+
+-- Filament
+-- require('filament').setup({ auto_install = false })
+local ok, filament = pcall(require, 'filament')
+if ok then
+  filament.setup({
+    auto_install = false, -- We use locally built parser
+    treesitter = {
+      highlight = { enable = true },
+      indent = { enable = true },
+    }
+  })
+end
+

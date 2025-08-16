@@ -1,5 +1,3 @@
-" Enable vimball plugin
-packadd vimball
 " Ident using 2 space characters
 set shiftwidth=2
 set softtabstop=2
@@ -160,3 +158,9 @@ let g:tex_comment_nospell=1
 
 " Maximum number of items to display in completion menu
 set pumheight=12
+
+" Enable wildmenu for command-line completion
+set wildmenu
+set wildmode=longest:full,full
+set wildoptions=pum
+

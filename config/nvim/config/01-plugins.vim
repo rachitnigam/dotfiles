@@ -3,12 +3,6 @@ if has('termguicolors')
   set termguicolors
 endif
 
-let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_transparent_background = 1
-let g:gruvbox_material_diagnostic_text_highlight = 1
-let g:gruvbox_material_diagnostic_virtual_text = 'colored'
-colorscheme gruvbox-material
-
 " ============= Autocomplete =================
 " Set completeopt to have a better completion experience
 " :help completeopt
@@ -35,7 +29,12 @@ autocmd  FileType Trouble set laststatus=0 noshowmode noruler norelativenumber n
 let delimitMate_expand_cr = 2 " Natural behavior when pressing enter.
 
 " ================ vim-airline ==================
-let g:airline_theme='gruvbox_material'
+" Try to set airline theme, fallback to default if not available
+try
+  let g:airline_theme='gruvbox-material'
+catch
+  let g:airline_theme='dark'
+endtry
 let g:airline_section_x=''
 let g:airline_section_y=''
 let g:airline_section_z=''

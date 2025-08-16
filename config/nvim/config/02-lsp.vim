@@ -25,8 +25,8 @@ local function on_attach()
       d = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "declaration" },
       a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "action" },
       r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "rename" },
-      f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "format" },
-      e = { "<cmd>lua vim.diagnostic.show_line_diagnostic()<CR>", "line diagnostic" },
+      f = { "<cmd>lua vim.lsp.buf.format()<CR>", "format" },
+      e = { "<cmd>lua vim.diagnostic.open_float()<CR>", "line diagnostic" },
     },
   }, { prefix = "<leader>", buffer = 0 })
 
@@ -36,7 +36,7 @@ local function on_attach()
       name = "errors",
       ["["] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "previous error" },
       ["]"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "next error" },
-      f = { "<cmd>lua vim.diagnostic.set_loclist()<CR>", "quickfix" },
+      f = { "<cmd>lua vim.diagnostic.setloclist()<CR>", "quickfix" },
     },
   }, { buffer = 0 })
 
@@ -52,7 +52,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     'additionalTextEdits',
   }
 }
-require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local function rust_on_attach()
   on_attach()
@@ -75,39 +75,8 @@ nvim_lsp.rust_analyzer.setup {
 }
 
 --- nvim-cmp capabilities
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-
---- Metals
-nvim_lsp.metals.setup{
-  on_attach = on_attach,
-}
-
---- Pyls
-nvim_lsp.pylsp.setup{
-  on_attach = on_attach,
-  settings = {
-    pylsp = {
-      configurationSources = {'flake8'},
-    }
-  }
-}
-
---- Racket
-nvim_lsp.racket_langserver.setup{
-  on_attach = on_attach,
-}
-
---- Clangd
-nvim_lsp.clangd.setup {
-  on_attach = on_attach,
-}
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Enable diagnostics
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = { spacing = 4, },
-    signs = true,
-    update_in_insert = true,
-  }
-)
+-- Diagnostics configuration moved to vim.diagnostic.config in lsp-config.lua
 EOF
