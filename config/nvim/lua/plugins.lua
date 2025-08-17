@@ -76,6 +76,9 @@ local cmp = require'cmp'
 local luasnip_ok, luasnip = pcall(require, 'luasnip')
 
 cmp.setup({
+  completion = {
+    autocomplete = false
+  },
   snippet = {
     expand = function(args)
       if luasnip_ok then
@@ -83,10 +86,24 @@ cmp.setup({
       end
     end,
   },
+  formatting = {
+    format = function(entry, vim_item)
+      -- Source
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        path = "[Path]",
+        nvim_lsp_signature_help = "[Signature]",
+      })[entry.source.name]
+      return vim_item
+    end
+  },
   sources = cmp.config.sources({
     { name = 'luasnip' },
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
+    { name = 'path' },
   }, {
     { name = 'buffer' },
   }),
@@ -190,6 +207,23 @@ cmp.setup({
         end
     }),
   },
+})
+
+-- Command-line completion
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })
 
 --- Trouble.nvim
