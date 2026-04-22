@@ -1,25 +1,46 @@
 # Enable profiling
 # zmodload zsh/zprof
 
-# If you don't have antigen installed, you're probably running on a new
-# machine
-if [[ ! -f /usr/local/share/antigen/antigen.zsh ]]; then
-  # Install antigen on Mac OS
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    if ! type "$brew" > /dev/null; then
-      echo '`brew` is missing. Installing...'
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-    echo 'Installing `antigen` for .zshrc plugin management...'
-    brew install antigen
-  else
-    echo '.zshrc requires `antigen` for plugin management! Please install it.'
-    return 1
-  fi
-fi
+ANTIGEN_DIR="/opt/homebrew/share/antigen/antigen.zsh"
 
-# Source anitgen for zsh plugin management
-source /usr/local/share/antigen/antigen.zsh
+# If antigen is available, apply theme.
+if [[ -f "$ANTIGEN_DIR" ]]; then
+  # Source anitgen for zsh plugin management
+  source "$ANTIGEN_DIR"
+
+  # Plugins from oh-my-zsh
+  antigen bundle git
+  antigen bundle vi-mode
+  antigen bundle colored-man-pages
+  antigen bundle autojump
+  antigen bundle command-not-found
+  
+  # Other plugins
+  antigen bundle zsh-users/zsh-syntax-highlighting
+  antigen bundle mroth/evalcache
+  antigen bundle zsh-users/zsh-autosuggestions
+
+  # Theme
+  antigen bundle agkozak/agkozak-zsh-prompt
+  AGKOZAK_LEFT_PROMPT_ONLY=1
+  AGKOZAK_PROMPT_DIRTRIM=0
+  AGKOZAK_CUSTOM_SYMBOLS=(
+    '⇣⇡' # Diverged
+    '⇣' # Behind
+    '⇡' # Ahead
+    '+' # New file
+    'x' # Deleted
+    '!' # Modified
+    '>' # Renamed
+    '?' # Untracked
+    '$' # Stashed changes
+  )
+
+  # Apply antigen configuration
+  antigen apply
+else
+  echo "zsh/antigen missing. ignoring antigen configuration..."
+fi
 
 # Autocompletion w/ once-a-day loading
 autoload -Uz compinit
@@ -29,37 +50,6 @@ if [ $(date +'%j') != $updated_at ]; then
 else
   compinit -C -i
 fi
-
-# Plugins from oh-my-zsh
-antigen bundle git
-antigen bundle vi-mode
-antigen bundle colored-man-pages
-antigen bundle autojump
-antigen bundle command-not-found
-
-# Other plugins
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle mroth/evalcache
-antigen bundle zsh-users/zsh-autosuggestions
-
-# Theme
-antigen bundle agkozak/agkozak-zsh-prompt
-AGKOZAK_LEFT_PROMPT_ONLY=1
-AGKOZAK_PROMPT_DIRTRIM=0
-AGKOZAK_CUSTOM_SYMBOLS=(
-  '⇣⇡' # Diverged
-  '⇣' # Behind
-  '⇡' # Ahead
-  '+' # New file
-  'x' # Deleted
-  '!' # Modified
-  '>' # Renamed
-  '?' # Untracked
-  '$' # Stashed changes
-)
-
-# Apply antigen configuration
-antigen apply
 
 # Colorize CLI ouputs
 export CLICOLOR=1
@@ -109,17 +99,9 @@ bindkey -M vicmd 'y' vi-yank-xclip
 # Reduce delay in when switching modes
 export KEYTIMEOUT=1
 
-export EDITOR=$(which nvim)
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Initialize pyenv
-PATH=$(pyenv root)/shims:$PATH
-_evalcache pyenv init -
-
 # Aliases
-alias cat=bat
-alias vim=nvim
 alias e=nvim
 
 # Function to get current git branch
