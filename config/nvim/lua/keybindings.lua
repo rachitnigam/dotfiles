@@ -9,7 +9,7 @@ wk.setup {
 --- Vim bindings
 wk.add({
   { "<C-n>", "<cmd>nohl<CR><C-l>", desc = "remove highlight" },
-  { "<C-P>", "<cmd>Telescope git_files<CR>", desc = "find files" },
+  { "<C-P>", "<cmd>Telescope find_files<CR>", desc = "find files" },
   { "<leader>w", "<cmd>w<CR>", desc = "save" },
   { "<leader>nt", "<cmd>NERDTreeToggle<CR>", desc = "Nerd Tree" },
 })

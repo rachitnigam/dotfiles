@@ -68,6 +68,7 @@ Plug 'pest-parser/pest.vim'
 Plug 'wlangstroth/vim-racket'
 Plug 'psosera/ott-vim'
 Plug 'rhysd/vim-llvm'
+Plug 'wannesm/wmnusmv.vim'
 Plug '~/git/dahlia/tools/vim/fuse'
 Plug '~/git/claude-filament/tools/vim/filament', {'do': 'cd ~/git/claude-filament/tools/treesitter && npm install && npm run build-parser'}
 Plug '~/git/calyx/tools/vim/futil'
