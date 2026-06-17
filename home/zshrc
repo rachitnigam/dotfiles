@@ -1,47 +1,6 @@
 # Enable profiling
 # zmodload zsh/zprof
 
-ANTIGEN_DIR="/opt/homebrew/share/antigen/antigen.zsh"
-
-# If antigen is available, apply theme.
-if [[ -f "$ANTIGEN_DIR" ]]; then
-  # Source anitgen for zsh plugin management
-  source "$ANTIGEN_DIR"
-
-  # Plugins from oh-my-zsh
-  antigen bundle git
-  antigen bundle vi-mode
-  antigen bundle colored-man-pages
-  antigen bundle autojump
-  antigen bundle command-not-found
-  
-  # Other plugins
-  antigen bundle zsh-users/zsh-syntax-highlighting
-  antigen bundle mroth/evalcache
-  antigen bundle zsh-users/zsh-autosuggestions
-
-  # Theme
-  antigen bundle agkozak/agkozak-zsh-prompt
-  AGKOZAK_LEFT_PROMPT_ONLY=1
-  AGKOZAK_PROMPT_DIRTRIM=0
-  AGKOZAK_CUSTOM_SYMBOLS=(
-    '⇣⇡' # Diverged
-    '⇣' # Behind
-    '⇡' # Ahead
-    '+' # New file
-    'x' # Deleted
-    '!' # Modified
-    '>' # Renamed
-    '?' # Untracked
-    '$' # Stashed changes
-  )
-
-  # Apply antigen configuration
-  antigen apply
-else
-  echo "zsh/antigen missing. ignoring antigen configuration..."
-fi
-
 # Autocompletion w/ once-a-day loading
 autoload -Uz compinit
 typeset -i updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
@@ -50,6 +9,40 @@ if [ $(date +'%j') != $updated_at ]; then
 else
   compinit -C -i
 fi
+
+# Source anitgen for zsh plugin management
+ANTIDOTE_DIR="$HOME/.zsh/antidote"
+source "$ANTIDOTE_DIR/antidote.zsh"
+antidote load "$HOME/.zsh_plugins.txt"
+
+# Prompt configuration
+AGKOZAK_LEFT_PROMPT_ONLY=1
+AGKOZAK_PROMPT_DIRTRIM=0
+AGKOZAK_USER_HOST_DISPLAY=0
+AGKOZAK_CUSTOM_SYMBOLS=(
+  '⇣⇡' # Diverged
+  '⇣' # Behind
+  '⇡' # Ahead
+  '+' # New file
+  'x' # Deleted
+  '!' # Modified
+  '>' # Renamed
+  '?' # Untracked
+  '$' # Stashed changes
+)
+AGKOZAK_PROMPT_CHAR=( ❯ ❯ ❮ )
+AGKOZAK_COLORS_PROMPT_CHAR='magenta'
+
+
+autoload -Uz promptinit && promptinit && prompt agkozak-zsh-prompt
+
+# fzf-tab configuration
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' menu no   # Match for unambiguous prefixes
+zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix 
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # Colorize CLI ouputs
 export CLICOLOR=1
@@ -69,8 +62,6 @@ setopt complete_in_word
 setopt always_to_end
 zstyle ':completion:*' menu select # highlight current tab selection
 
-## partial completion suggestions
-zstyle ':completion:*' list-suffixes zstyle ':completion:*' expand prefix suffix 
 
 # History settings
 export HISTFILE="$HOME/.zsh_history"
@@ -102,22 +93,13 @@ export KEYTIMEOUT=1
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Aliases
-alias e=nvim
-
-# Function to get current git branch
-git_current_branch () {
-  local ref
-  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
-  local ret=$?
-  if [[ $ret != 0 ]]; then
-    [[ $ret == 128 ]] && return  # no git repo.
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-  fi
-  echo ${ref#refs/heads/}
-}
+alias e="vim"
+alias ls="eza"
 
 # Cargo aliases
 alias cb="cargo build"
 alias cba="cargo build --all"
 alias cr="cargo run"
 alias cfa="cargo fmt --all"
+
+# zprof
