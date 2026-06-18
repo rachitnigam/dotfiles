@@ -95,6 +95,7 @@ export KEYTIMEOUT=1
 # Aliases
 alias e="vim"
 alias ls="eza"
+alias j="z"
 
 # Cargo aliases
 alias cb="cargo build"
