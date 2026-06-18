@@ -37,6 +37,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'sheerun/vim-polyglot'
 Plug 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 Plug 'wlangstroth/vim-racket'
+Plug '~/git/silly/tools/vim'
 
 call plug#end()
 filetype plugin indent on    " required

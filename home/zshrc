@@ -92,6 +92,16 @@ export KEYTIMEOUT=1
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Git aliases
+alias g="git"
+alias ga="git add"
+alias gc="git commit"
+alias gst="git status"
+alias gd="git diff"
+alias gcb="git checkout -b"
+alias gsw="git switch"
+alias gp="git push"
+
 # Aliases
 alias e="vim"
 alias ls="eza"
