@@ -101,6 +101,7 @@ alias gd="git diff"
 alias gcb="git checkout -b"
 alias gsw="git switch"
 alias gp="git push"
+alias gds="git diff --staged"
 
 # Aliases
 alias e="vim"
