@@ -1,3 +1,4 @@
 .DS_Store
 *.swp
 config/nvim/.netrwhist
+config/nvim/lua/plugins/custom-langs.lua
